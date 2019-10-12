@@ -12,16 +12,19 @@
         <module>eureka-server</module>
         <module>auth-server</module>
         <module>zuul-server</module>
+        <module>elasticsearch-example</module>
     </modules>
 
     <properties>
+        <!--基础依赖-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-boot.version>2.0.8.RELEASE</spring-boot.version>
         <spring-cloud.version>Finchley.SR4</spring-cloud.version>
-
+        <!--全局版本控制-->
         <fastjson.version>1.2.47</fastjson.version>
+
     </properties>
 
     <dependencyManagement>
@@ -51,5 +54,27 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--解决打包时编译报错的问题-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>8</source>
+                        <target>8</target>
+                    </configuration>
+                </plugin>
+                <!--解决打包时插件版本丢失的问题-->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
