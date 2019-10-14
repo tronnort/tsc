@@ -1,0 +1,22 @@
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/tronnort/config-offer.git
+          username: tronnort
+          password: glr860308
+#         basedir:   配置表本地git存放路径
+# http://localhost:8000/configserver-a.yml   获取文件名configserver.yml的配置信息
+# http://localhost:8000/configserver-dev.yml   可以根据后缀名来区分环境
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 8000

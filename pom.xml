@@ -13,6 +13,8 @@
         <module>auth-server</module>
         <module>zuul-server</module>
         <module>elasticsearch-example</module>
+        <module>config-server</module>
+        <module>config-example</module>
     </modules>
 
     <properties>

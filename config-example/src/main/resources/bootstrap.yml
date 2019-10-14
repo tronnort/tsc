@@ -1,0 +1,14 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+spring:
+  application:
+    name: config-example
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      profile: dev
+#以上配置必须项  对应config-example dev  到'https://github.com/tronnort/config-offer.git/config-example-dev.yml 拿配置文件
