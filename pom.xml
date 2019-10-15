@@ -15,6 +15,8 @@
         <module>elasticsearch-example</module>
         <module>config-server</module>
         <module>config-example</module>
+        <module>feign-example-one</module>
+        <module>feign-example-two</module>
     </modules>
 
     <properties>
