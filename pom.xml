@@ -17,6 +17,7 @@
         <module>config-example</module>
         <module>feign-example-one</module>
         <module>feign-example-two</module>
+        <module>java-study</module>
     </modules>
 
     <properties>
