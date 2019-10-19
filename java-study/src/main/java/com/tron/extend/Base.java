@@ -14,8 +14,19 @@ public class Base {
     }
 
     Base() {
-        System.out.println("Base构造方法执行");
+        System.out.println("Base构造方法执行----");
         System.out.println("Base.a ："+a);
         System.out.println("Base.s : "+s);
+        System.out.println("Base构造方法执行结束----");
+    }
+
+    protected void step() {
+        System.out.println("a: "+ a +", s: "+s);
+    }
+
+    protected void action() {
+        System.out.println("start");
+        step();
+        System.out.println("end");
     }
 }

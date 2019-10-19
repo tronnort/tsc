@@ -22,6 +22,7 @@ public class StartOne {
         otherAnimal.eat();
         otherAnimal.sleep();
         System.out.println(Bird.staticData);   //类属性用类名访问
+        System.out.println(bird.staticData);
         //---------------------------
         System.out.println(new Dog());
         System.out.println(new Dog().finalData); //可以被继承---可能被覆盖--但是不能被修改

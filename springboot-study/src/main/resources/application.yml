@@ -1,0 +1,43 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: 123456
+#-----------------------初始化建表----------------------
+#    schema:
+#      - classpath:schema.sql
+#    data:
+#      - classpath:data.sql
+#    initialization-mode: always
+server:
+  port: 8080
+#------------------------本地环境变量配置-------------------------
+mydata:
+  url: http://www.tron.com
+  id: 001
+  list:
+    - item01
+    - item02
+    - item03
+  map:
+    k1: v1
+    k2: v2
+    k3: v3
+#--------------------MyBatisPuls  SQL 输出配置 ------------------
+logging:
+  level:
+    com.tron.web.mapper: debug
+
+---
+spring:
+  profiles: test
+server:
+  port: 8082
