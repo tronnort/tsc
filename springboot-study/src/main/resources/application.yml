@@ -19,7 +19,7 @@ spring:
 #    initialization-mode: always
 server:
   port: 8080
-#------------------------本地环境变量配置-------------------------
+#------------------------本地环境变量配置，使用方法参见com.tron.web.config.MyEnvironment和com.tron.web.config.TestReadConfig-------------------------
 mydata:
   url: http://www.tron.com
   id: 001
