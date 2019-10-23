@@ -18,6 +18,7 @@ public class FeignOneController {
 
     @RequestMapping("/getNameFromFeignTwo")
     public String getNameFromFeignTwo(){
+
         return feignService.getName();
     }
 }
