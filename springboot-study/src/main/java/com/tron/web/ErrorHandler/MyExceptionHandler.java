@@ -16,10 +16,9 @@ public class MyExceptionHandler {
     @ResponseBody
     @ExceptionHandler({})   //可以指定异常类型，也可以默认所有异常都按此方法处理
     public Map<String, Object> errorHandler(Exception e) {
-        MyException myException;
         HashMap<String, Object> map = new HashMap<>();
         if (e instanceof MyException) {
-            myException = (MyException)e;
+            MyException  myException = (MyException)e;
             map.put("code",myException.getCode());
         }else if (e instanceof BindException){
             StringBuffer stringBuffer = new StringBuffer();
