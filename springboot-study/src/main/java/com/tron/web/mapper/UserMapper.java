@@ -1,6 +1,6 @@
 package com.tron.web.mapper;
 
-import com.tron.web.entity.Dept;
+import com.tron.web.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author tron
- * @since 2019-10-19
+ * @since 2019-10-25
  */
-public interface DeptMapper extends BaseMapper<Dept> {
+public interface UserMapper extends BaseMapper<User> {
 
 }

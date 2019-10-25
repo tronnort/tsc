@@ -1,6 +1,6 @@
 package com.tron.web.service;
 
-import com.tron.web.entity.Dept;
+import com.tron.web.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author tron
- * @since 2019-10-19
+ * @since 2019-10-25
  */
-public interface IDeptService extends IService<Dept> {
+public interface IUserService extends IService<User> {
 
 }

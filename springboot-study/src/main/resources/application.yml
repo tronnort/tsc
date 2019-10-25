@@ -12,11 +12,11 @@ spring:
     username: root
     password: 123456
 #-----------------------初始化建表----------------------
-#    schema:
-#      - classpath:schema.sql
-#    data:
-#      - classpath:data.sql
-#    initialization-mode: always
+    schema:
+      - classpath:schema.sql
+    data:
+      - classpath:data.sql
+    initialization-mode: always
 
 #----------------------------缓存------------------------
   redis:
