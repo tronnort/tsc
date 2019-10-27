@@ -2,6 +2,16 @@
 <#assign lowName = "${table.entityPath}">
 <#assign packageName = "${'${package.Controller}'?replace('.controller','')}">
 
+<#function getComment>
+    <#local names = "">
+    <#list table.fields as node>
+    <#local names = names +node.name+":"+node.comment+" ">
+    </#list>
+    <#return "{"+ names + "}">
+</#function>
+
+<#--   ${getComment()}    获取对象的json字符串-->
+
 package ${package.Controller};
 
 import ${packageName}.entity.${upName};
@@ -9,10 +19,9 @@ import ${packageName}.service.${table.serviceName};
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import java.util.*;
 
 <#if restControllerStyle>
@@ -41,6 +50,7 @@ import ${superControllerClassPackage};
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
+@Api(tags = "${table.comment}操作")
 <#if superControllerClass??>
 public class ${table.controllerName} extends ${superControllerClass} {
 <#else>
@@ -49,36 +59,52 @@ public class ${table.controllerName} {
     @Autowired
     private ${table.serviceName} ${(table.serviceName?substring(1))?uncap_first};
 
-
-    @RequestMapping("/{id}")
-    public Object get${upName}ById(@PathVariable String id){
+    @ApiOperation(value = "根据Id查询${table.comment}" ,notes = "返回数据${getComment()}")
+    @RequestMapping(value ="/{id}",method = RequestMethod.GET)
+    public Object get${upName}ById(
+        @ApiParam(name="id",value="主键",example = "1",required=true)
+        @PathVariable String id){
         return ${lowName}Service.getById(id);
     }
-
-    @RequestMapping("/add")
-    public Object add${upName}(${upName} ${lowName}) {
+    @ApiOperation(value = "添加${table.comment}",notes = "参数参考${getComment()},id自动生成")
+    @RequestMapping(value ="/add",method = RequestMethod.POST)
+    public Object add${upName}(
+        @ApiParam(name="${lowName}",value="${getComment()}",example = "{}",required=true)
+        ${upName} ${lowName}) {
     String id = UUID.randomUUID().toString().replace("-", "");
         ${lowName}.setId(id);
         ${lowName}Service.save(${lowName});
         return id;
     }
 
-    @RequestMapping("/update")
-    public Object update${upName}(${upName} ${lowName}) {
+    @ApiOperation(value = "更新${table.comment}" ,notes = "参数参考${getComment()}")
+    @RequestMapping(value ="/update",method = RequestMethod.POST)
+    public Object update${upName}(
+        @ApiParam(name="${lowName}",value="${getComment()}",example = "{}",required=true)
+        ${upName} ${lowName}) {
         boolean update = ${lowName}Service.updateById(${lowName});
         return update;
     }
 
-    @RequestMapping("/delete")
-    public Object delete${upName}(String[] ids) {
+    @ApiOperation(value = "删除${table.comment}")
+    @RequestMapping(value ="/delete",method = RequestMethod.POST)
+    public Object delete${upName}(
+        @ApiParam(name="ids",value="主键列表",example = "{ids:1,2,3}",required=true)
+        String[] ids) {
         boolean remove = ${lowName}Service.removeByIds(Arrays.asList(ids));
         return remove;
     }
 
-    @RequestMapping("/query/{current}/{size}")
-    public Object queryUser(@PathVariable Long current,
-                            @PathVariable Long size,
-                            @RequestBody Map<String,String> conditions) {
+
+    @ApiOperation(value = "query查询${table.comment}")
+    @RequestMapping(value ="/query/{current}/{size}",method = RequestMethod.POST)
+    public Object queryUser(
+        @ApiParam(name="current",value="页码",example = "1",required=true)
+        @PathVariable Long current,
+        @ApiParam(name="size",value="最大显示条数",example = "10",required=true)
+        @PathVariable Long size,
+        @ApiParam(name="conditions",value="查询条件",example = "{}",required=true)
+        @RequestBody Map<String,String> conditions) {
         List<${upName}> list = new ArrayList<>();
         long defaultCurrent = (current != null && current > 0 ) ? current : 1;
         long defaultSize = (size != null && size > 0 ) ? size : 20;

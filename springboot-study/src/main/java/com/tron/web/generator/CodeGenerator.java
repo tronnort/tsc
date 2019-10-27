@@ -44,7 +44,7 @@ public class CodeGenerator {
         gc.setOutputDir(projectPath + "/springboot-study/src/main/java");  //多模块时指定模块名称
         gc.setAuthor("tron");
         gc.setOpen(false);
-        // gc.setSwagger2(true); 实体属性 Swagger2 注解
+        gc.setSwagger2(true);   //实体属性 Swagger2 注解
         mpg.setGlobalConfig(gc);
 
         // 数据源配置

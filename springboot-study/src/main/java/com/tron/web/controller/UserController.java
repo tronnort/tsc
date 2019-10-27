@@ -6,58 +6,74 @@ import com.tron.web.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import java.util.*;
 
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 用户表 前端控制器
  * </p>
  *
  * @author tron
- * @since 2019-10-26
+ * @since 2019-10-27
  */
 @RestController
 @RequestMapping("/web/user")
+@Api(tags = "用户表操作")
 public class UserController {
     @Autowired
     private IUserService userService;
 
-
-    @RequestMapping("/{id}")
-    public Object getUserById(@PathVariable String id){
+    @ApiOperation(value = "根据Id查询用户表" ,notes = "返回数据{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }")
+    @RequestMapping(value ="/{id}",method = RequestMethod.GET)
+    public Object getUserById(
+        @ApiParam(name="id",value="主键",example = "1",required=true)
+        @PathVariable String id){
         return userService.getById(id);
     }
-
-    @RequestMapping("/add")
-    public Object addUser(User user) {
+    @ApiOperation(value = "添加用户表",notes = "参数参考{id:主键 username:账号 name:姓名 age:年龄 balance:余额 },id自动生成")
+    @RequestMapping(value ="/add",method = RequestMethod.POST)
+    public Object addUser(
+        @ApiParam(name="user",value="{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }",example = "{}",required=true)
+        User user) {
     String id = UUID.randomUUID().toString().replace("-", "");
         user.setId(id);
         userService.save(user);
         return id;
     }
 
-    @RequestMapping("/update")
-    public Object updateUser(User user) {
+    @ApiOperation(value = "更新用户表" ,notes = "参数参考{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }")
+    @RequestMapping(value ="/update",method = RequestMethod.POST)
+    public Object updateUser(
+        @ApiParam(name="user",value="{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }",example = "{}",required=true)
+        User user) {
         boolean update = userService.updateById(user);
         return update;
     }
 
-    @RequestMapping("/delete")
-    public Object deleteUser(String[] ids) {
+    @ApiOperation(value = "删除用户表")
+    @RequestMapping(value ="/delete",method = RequestMethod.POST)
+    public Object deleteUser(
+        @ApiParam(name="ids",value="主键列表",example = "{ids:1,2,3}",required=true)
+        String[] ids) {
         boolean remove = userService.removeByIds(Arrays.asList(ids));
         return remove;
     }
 
-    @RequestMapping("/query/{current}/{size}")
-    public Object queryUser(@PathVariable Long current,
-                            @PathVariable Long size,
-                            @RequestBody Map<String,String> conditions) {
+
+    @ApiOperation(value = "query查询用户表")
+    @RequestMapping(value ="/query/{current}/{size}",method = RequestMethod.POST)
+    public Object queryUser(
+        @ApiParam(name="current",value="页码",example = "1",required=true)
+        @PathVariable Long current,
+        @ApiParam(name="size",value="最大显示条数",example = "10",required=true)
+        @PathVariable Long size,
+        @ApiParam(name="conditions",value="查询条件",example = "{}",required=true)
+        @RequestBody Map<String,String> conditions) {
         List<User> list = new ArrayList<>();
         long defaultCurrent = (current != null && current > 0 ) ? current : 1;
         long defaultSize = (size != null && size > 0 ) ? size : 20;
