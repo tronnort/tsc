@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 
 import org.springframework.web.bind.annotation.RestController;
+import com.tron.web.common.BaseController;
 
 /**
  * <p>
@@ -19,55 +20,57 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author tron
- * @since 2019-10-27
+ * @since 2019-10-29
  */
 @RestController
 @RequestMapping("/web/user")
 @Api(tags = "用户表操作")
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     private IUserService userService;
 
     @ApiOperation(value = "根据Id查询用户表" ,notes = "返回数据{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }")
     @RequestMapping(value ="/{id}",method = RequestMethod.GET)
-    public Object getUserById(
+    public SuccessResult<User> getUserById(
         @ApiParam(name="id",value="主键",example = "1",required=true)
         @PathVariable String id){
-        return userService.getById(id);
+        User user = userService.getById(id);
+        return buildSuccessResult(user);
     }
+
     @ApiOperation(value = "添加用户表",notes = "参数参考{id:主键 username:账号 name:姓名 age:年龄 balance:余额 },id自动生成")
     @RequestMapping(value ="/add",method = RequestMethod.POST)
-    public Object addUser(
+    public SuccessResult<String> addUser(
         @ApiParam(name="user",value="{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }",example = "{}",required=true)
-        User user) {
-    String id = UUID.randomUUID().toString().replace("-", "");
+        @RequestBody User user) {
+        String id = UUID.randomUUID().toString().replace("-", "");
         user.setId(id);
         userService.save(user);
-        return id;
+        return  buildSuccessResult(id);
     }
 
     @ApiOperation(value = "更新用户表" ,notes = "参数参考{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }")
     @RequestMapping(value ="/update",method = RequestMethod.POST)
-    public Object updateUser(
+    public SuccessResult<Boolean> updateUser(
         @ApiParam(name="user",value="{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }",example = "{}",required=true)
-        User user) {
+        @RequestBody User user) {
         boolean update = userService.updateById(user);
-        return update;
+        return  buildSuccessResult(update);
     }
 
-    @ApiOperation(value = "删除用户表")
+    @ApiOperation(value = "删除用户表" ,notes = "参数参考[1,2,3]")
     @RequestMapping(value ="/delete",method = RequestMethod.POST)
-    public Object deleteUser(
-        @ApiParam(name="ids",value="主键列表",example = "{ids:1,2,3}",required=true)
-        String[] ids) {
+    public SuccessResult<Boolean> deleteUser(
+        @ApiParam(name="ids",value="主键列表",example = "[1,2,3]",required=true)
+        @RequestBody String[] ids) {
         boolean remove = userService.removeByIds(Arrays.asList(ids));
-        return remove;
+        return  buildSuccessResult(remove);
     }
 
 
-    @ApiOperation(value = "query查询用户表")
+    @ApiOperation(value = "query查询用户表" ,notes = "conditions参数参考{\"name\":tron}")
     @RequestMapping(value ="/query/{current}/{size}",method = RequestMethod.POST)
-    public Object queryUser(
+    public SuccessResult<List<User>> queryUser(
         @ApiParam(name="current",value="页码",example = "1",required=true)
         @PathVariable Long current,
         @ApiParam(name="size",value="最大显示条数",example = "10",required=true)
@@ -97,7 +100,7 @@ public class UserController {
             IPage<User> iPage = userService.page(page);
             list = iPage.getRecords();
         }
-        return list;
+        return buildSuccessResult(list);
     }
 
 }

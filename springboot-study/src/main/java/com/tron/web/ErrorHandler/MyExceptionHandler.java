@@ -26,7 +26,7 @@ public class MyExceptionHandler {
             List<ObjectError> allErrors = bindException.getAllErrors();
             allErrors.forEach(x-> stringBuffer.append(x.getObjectName()).append(x.getDefaultMessage()).append(","));
             map.put("msg", stringBuffer.toString());
-            map.put("code", 911);   //处理非自定异常时的默认code
+            map.put("code", 400);   //参数校验异常
             return map;
         }else {
             map.put("code", 911);   //处理非自定异常时的默认code

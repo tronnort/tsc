@@ -21,6 +21,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan("com.tron.web.mapper")
 @EnableSwagger2
 public class MyConfig {
+
+    /**
+     *
+     * myBaitsPlus分页插件配置
+     *
+     * */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
