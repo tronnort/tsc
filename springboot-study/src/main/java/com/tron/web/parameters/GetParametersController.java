@@ -79,4 +79,35 @@ public class GetParametersController {
         System.out.println(person);
         return "success";
     }
+
+    /**
+     * 传参为json格式，接受参数为对象时，需要使用@RequestBody     ["1","2"]
+     * localhost:8080/dataTest07?code=111  code可以用普通的url传值方式获取
+     * */
+    @RequestMapping("/dataTest07")
+    public Object dataTest07(@RequestBody String[] ids,String code) {
+        return "success";
+    }
+
+
+
+    /**
+     * 无论怎么传值都报错
+     * */
+    @RequestMapping("/dataTest08")
+    public Object dataTest08(@RequestBody String[] ids,@RequestBody String code) {
+        return "success";
+    }
+
+    /**
+     *
+     *
+     *
+     * 注解对比图
+     * 区别	                 @RequestParam                    	@RequestBody
+     * content-type	     仅支持x-www-form-urlencoded	           json（常用）, xml
+     * 请求类型	                所有                           	除了GET
+     * 注解个数	               可多个	                        只能有一个
+     *
+     * */
 }

@@ -5,5 +5,7 @@ public class Start {
         UseAnnotation useAnnotation = new UseAnnotation();
         System.out.println(useAnnotation.getName());
         System.out.println(useAnnotation.age);
+
     }
+
 }
