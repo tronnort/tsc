@@ -1,8 +1,8 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   profiles:
-    active: dev
+    active: test
 ---
 spring:
   profiles: dev
@@ -25,9 +25,6 @@ spring:
     password: 123456
 
 
-
-server:
-  port: 8080
 #------------------------本地环境变量配置，使用方法参见com.tron.web.config.MyEnvironment和com.tron.web.config.TestReadConfig-------------------------
 mydata:
   url: http://www.tron.com
@@ -48,5 +45,22 @@ logging:
 ---
 spring:
   profiles: test
-server:
-  port: 8082
+  datasource:
+    dynamic:
+      primary: mydb1
+      datasource:
+        mydb1:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/mydb1?useUnicode=true&useSSL=false&characterEncoding=utf8
+          username: root
+          password: 123456
+        mydb2:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/mydb2?useUnicode=true&useSSL=false&characterEncoding=utf8
+          username: root
+          password: 123456
+
+
+logging:
+  level:
+    com.tron.web.twodatasources: debug

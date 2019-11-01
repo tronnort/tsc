@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableConfigurationProperties
 @EnableTransactionManagement
-@MapperScan("com.tron.web.mapper")
+@MapperScan(basePackages = {"com.tron.web.mapper","com.tron.web.twodatasources"})
 @EnableSwagger2
 public class MyConfig {
 
