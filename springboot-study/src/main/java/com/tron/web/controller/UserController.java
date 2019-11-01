@@ -1,11 +1,14 @@
 
 package com.tron.web.controller;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.tron.web.entity.User;
+import com.tron.web.mapper.UserMapper;
 import com.tron.web.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tron.web.service.impl.UserServiceImpl;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,9 @@ import com.tron.web.common.BaseController;
 public class UserController extends BaseController {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @ApiOperation(value = "根据Id查询用户表" ,notes = "返回数据{id:主键 username:账号 name:姓名 age:年龄 balance:余额 }")
     @RequestMapping(value ="/{id}",method = RequestMethod.GET)
@@ -101,6 +107,15 @@ public class UserController extends BaseController {
             list = iPage.getRecords();
         }
         return buildSuccessResult(list);
+    }
+
+
+    @RequestMapping("/mapperTest")
+    public Object test() {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.eq("id", 1);
+        User user = userMapper.tronGet(userQueryWrapper);
+        return user;
     }
 
 }
