@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tron.web.mybatis.SchoolClassMapper">
+    <resultMap id="schoolClassMap" type="com.tron.web.mybatis.SchoolClass">
+        <id property="id" column="id"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="classNo" column="class_id"/>
+        <collection property="student" column="id" select="com.tron.web.mybatis.StudentMapper.getStudentBySchoolClassId"/>
+    </resultMap>
+
+</mapper>

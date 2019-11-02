@@ -34,11 +34,20 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.2.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter -->
+
+
+        <!-- 数据源动态切换，请参考test配置，使用方法参考com.tron.web.twodatasources -->
+        <!--<dependency>-->
+        <!--<groupId>com.baomidou</groupId>-->
+        <!--<artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
+        <!--<version>2.5.4</version>-->
+        <!--</dependency>-->
+
+        <!--配置文件参考application.yml,sql监控页面   localhost:8080/druid-->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>2.5.4</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.9</version>
         </dependency>
 
         <dependency>
@@ -85,9 +94,9 @@
         </dependency>
         <!-- swagger-ui -->
         <!--<dependency>-->
-            <!--<groupId>io.springfox</groupId>-->
-            <!--<artifactId>springfox-swagger-ui</artifactId>-->
-            <!--<version>2.9.2</version>-->
+        <!--<groupId>io.springfox</groupId>-->
+        <!--<artifactId>springfox-swagger-ui</artifactId>-->
+        <!--<version>2.9.2</version>-->
         <!--</dependency>-->
 
         <!--http://localhost:8080/doc.html-->
@@ -97,6 +106,15 @@
             <artifactId>swagger-bootstrap-ui</artifactId>
             <version>1.9.3</version>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>2.0.8.RELEASE</version>
+        </dependency>
+
 
     </dependencies>
 

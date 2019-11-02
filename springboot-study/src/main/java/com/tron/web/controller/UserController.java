@@ -1,7 +1,6 @@
 
 package com.tron.web.controller;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.tron.web.entity.User;
 import com.tron.web.mapper.UserMapper;
 import com.tron.web.service.IUserService;
@@ -110,7 +109,7 @@ public class UserController extends BaseController {
     }
 
 
-    @RequestMapping("/mapperTest")
+    @RequestMapping(value = "/mapperTest",method = RequestMethod.GET)
     public Object test() {
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.eq("id", 1);
