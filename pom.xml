@@ -19,6 +19,9 @@
         <module>feign-example-two</module>
         <module>java-study</module>
         <module>springboot-study</module>
+        <module>consul-server</module>
+        <module>feign-example-three</module>
+        <module>gateway-server</module>
     </modules>
 
     <properties>

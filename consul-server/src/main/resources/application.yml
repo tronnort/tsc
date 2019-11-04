@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: consul-server
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        health-check-interval: 20s
+        health-check-path: /health
+        tags: ${LANG},服务注册
