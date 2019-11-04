@@ -1,9 +1,9 @@
-#####项目开始，需求分析之后当然是建，数据模型。
+#####建数据模型
 ~~~
 把建表sql命名为 schema.sql 测试数命名为 data.sql ，application.yml 里配置相应的配置。启动项目，springboot会自动创建表和测试数据。
 
 ~~~
-#####有了表就可以开始写代码了？不，可以自动生成代码了
+#####自动生成代码
 ~~~
         <dependency>
             <groupId>mysql</groupId>
