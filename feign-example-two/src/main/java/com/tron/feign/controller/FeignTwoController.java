@@ -1,7 +1,6 @@
 package com.tron.feign.controller;
 
 import com.tron.entity.CommonData;
-import com.tron.feign.service.FeignService;
 import com.tron.feign.service.impl.CommonDataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,34 +11,23 @@ import java.util.List;
 public class FeignTwoController {
 
     @Autowired
-    private FeignService feignService;
-
-    @Autowired
     private CommonDataServiceImpl commonDataService;
 
-    @RequestMapping("/getName")
-    public String getName() throws Exception{
-        Thread.sleep(2000);
-        return "I am from FeignTwo";
-    }
 
-    @RequestMapping("/getNameFromFeignOne")
-    public String getNameFromFeignOne(){
-        return feignService.getName();
-    }
-
-    @RequestMapping("/getCommonDatas")
-    public List<CommonData> getCommonDatas() {
+    @GetMapping("/getCommonDatas")
+    public List<CommonData> getCommonDatas() throws InterruptedException {
+        Thread.sleep(5000);
         return commonDataService.getCommonDatas();
     }
 
 
-    @RequestMapping(name = "/getCommonDataById",method = RequestMethod.GET)
-    public CommonData getCommonDataById(String id) {
+    @GetMapping("/getCommonDataById")
+    public CommonData getCommonDataById(String id) throws InterruptedException {
+        Thread.sleep(5000);
         return commonDataService.getCommonDataById(id);
     }
 
-    @RequestMapping(name = "/updateCommonDataById",method = RequestMethod.POST)
+    @PostMapping("/updateCommonDataById")
     public String updateCommonDataById(@RequestBody CommonData commonData) {
         return commonDataService.updateCommonDataById(commonData);
     }

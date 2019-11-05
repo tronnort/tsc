@@ -3,6 +3,8 @@ package com.tron.entity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * @Description
  * @auther tron
@@ -11,7 +13,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class CommonData {
+public class CommonData{
     private String string;
     private Integer integer;
 }

@@ -1,30 +1,23 @@
 package com.tron.feign.service;
 
 import com.tron.entity.CommonData;
-import com.tron.feign.fallback.MyFallBack;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "feign-two",fallback = MyFallBack.class)
 @Component
+@FeignClient("feign-two")
 public interface FeignService {
 
-    @RequestMapping("/getName")
-    String getName();
-
-    @RequestMapping(name = "/getCommonDatas",method = RequestMethod.GET)
+    @GetMapping("/getCommonDatas")
     List<CommonData> getCommonDatas();
 
-
-    @RequestMapping(name = "/getCommonDataById",method = RequestMethod.GET)
+    @GetMapping("/getCommonDataById")
     CommonData getCommonDataById(@RequestParam(value = "id") String id);
 
-    @RequestMapping(name = "/updateCommonDataById",method = RequestMethod.POST)
+    @PostMapping("/updateCommonDataById")
     String updateCommonDataById(@RequestBody CommonData commonData);
+
 }

@@ -30,7 +30,7 @@ hystrix:
           enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 5000  #断路器超时时间，默认1000ms
+            timeoutInMilliseconds: 3000  #断路器超时时间，默认1000ms
 #management:
 #  endpoints:
 #    web:

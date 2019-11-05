@@ -15,17 +15,16 @@ import java.util.List;
 public class CommonDataServiceImpl {
 
     public List<CommonData> getCommonDatas() {
-        List<CommonData> commonDatas = Arrays.asList(
+        return Arrays.asList(
                 new CommonData().setString("1").setInteger(1),
                 new CommonData().setString("2").setInteger(2),
                 new CommonData().setString("3").setInteger(3)
         );
-        return commonDatas;
     }
 
 
     public CommonData getCommonDataById(String id) {
-        CommonData commonData = new CommonData().setString(id).setInteger(911);
+        CommonData commonData = new CommonData().setString(id).setInteger(200);
         return commonData;
     }
 
