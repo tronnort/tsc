@@ -1,4 +1,4 @@
-package com.tron.web.ErrorHandler;
+package com.tron.web.errorhandler;
 
 public class MyException extends RuntimeException {
     private Integer code;

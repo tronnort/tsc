@@ -6,7 +6,9 @@ import com.tron.web.parameters.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -61,6 +63,13 @@ public class RestTestController {
         String id = (String) map.get("id");
         System.out.println(person);
         System.out.println(id);
+        return "success";
+    }
+
+
+    @RequestMapping("/forRestTest08")
+    public String restUpload(@RequestParam MultipartFile file) {
+        System.out.println(file.getOriginalFilename());
         return "success";
     }
 }

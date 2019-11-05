@@ -22,6 +22,7 @@
         <module>consul-server</module>
         <module>feign-example-three</module>
         <module>gateway-server</module>
+        <module>com-tron-common</module>
     </modules>
 
     <properties>

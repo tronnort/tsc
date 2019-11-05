@@ -1,10 +1,7 @@
-package com.tron.web.ErrorHandler;
+package com.tron.web.errorhandler;
 
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.function.Supplier;
 
 @RestController
 public class Test {
