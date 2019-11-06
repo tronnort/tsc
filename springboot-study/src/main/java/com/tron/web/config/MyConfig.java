@@ -74,4 +74,15 @@ public class MyConfig {
     }
 
 
+    /**
+     *
+     * 自定义拦截器
+     *
+     * */
+    @Bean
+    public MyFilter myFilter() {
+        return new MyFilter();
+    }
+
+
 }
