@@ -2,6 +2,8 @@ package com.tron.lambda;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -19,19 +21,23 @@ public class DishStart {
                 new Dish("salmon", false, 450, Dish.Type.FISH)
         );
 
-        List<String> threeHighCaloricDishNames =
-                menu.stream()
-                        .filter(d -> d.getCalories() > 300)
-                        .map(Dish::getName)
-                        .limit(3)
-                        .collect(toList());
-        System.out.println(threeHighCaloricDishNames);
+        Map<Dish.Type, List<Dish>> collect = test03(menu);
+        List<String> threeHighCaloricDishNames1 = test02(menu);
+        long count = test01(menu);
 
-        long count = menu.stream()
-                .filter(d -> d.getCalories() > 300)
-                .distinct()
-                .limit(10)
-                .count();
-        System.out.println(count);
+        System.out.println(collect);
+    }
+
+    private static Map<Dish.Type, List<Dish>> test03(List<Dish> menu) {
+        return menu.stream().collect(Collectors.groupingBy(Dish::getType));
+    }
+
+
+    private static List<String> test02(List<Dish> menu) {
+        return menu.stream().filter(d -> d.getCalories() > 300).map(Dish::getName).limit(3).collect(toList());
+    }
+
+    private static long test01(List<Dish> menu) {
+        return menu.stream().filter(d -> d.getCalories() > 300).distinct().limit(10).count();
     }
 }
