@@ -40,29 +40,29 @@ create table access(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '资源列表表';
 
 --   为了测试mybatis建的表
-# DROP TABLE IF EXISTS school;
-# CREATE TABLE school(
-#   id VARCHAR(100) NOT NULL COMMENT '学校id',
-#   name VARCHAR(100) NOT NULL COMMENT '学校名称',
-#  address VARCHAR(300) NOT NULL COMMENT '学校地址',
-#  PRIMARY KEY (id)
-# )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '学校表';
+ DROP TABLE IF EXISTS school;
+ CREATE TABLE school(
+   id VARCHAR(100) NOT NULL COMMENT '学校id',
+   name VARCHAR(100) NOT NULL COMMENT '学校名称',
+  address VARCHAR(300) NOT NULL COMMENT '学校地址',
+  PRIMARY KEY (id)
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '学校表';
 --
-# DROP TABLE IF EXISTS school_class;
-# CREATE TABLE school_class(
-#  id VARCHAR(100) NOT NULL COMMENT '班级id',
-#  name VARCHAR(100) NOT NULL COMMENT '班级名称',
-#  school_id VARCHAR(100) NOT NULL COMMENT '学校id',
-#  class_no VARCHAR(100) NOT NULL COMMENT '班级编号',
-#  PRIMARY KEY (id)
-# )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '班级表';
+ DROP TABLE IF EXISTS school_class;
+ CREATE TABLE school_class(
+  id VARCHAR(100) NOT NULL COMMENT '班级id',
+  name VARCHAR(100) NOT NULL COMMENT '班级名称',
+  school_id VARCHAR(100) NOT NULL COMMENT '学校id',
+  class_no VARCHAR(100) NOT NULL COMMENT '班级编号',
+  PRIMARY KEY (id)
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '班级表';
 --
-# DROP TABLE IF EXISTS student;
-# CREATE TABLE student(
-#  id VARCHAR(100) NOT NULL COMMENT '班级id',
-#  name VARCHAR(100) NOT NULL COMMENT '学生姓名',
-#  gender VARCHAR(4) NOT NULL COMMENT '学生性别',
-#  school_id VARCHAR(100) NOT NULL COMMENT '学校id',
-#  class_id VARCHAR(100) NOT NULL COMMENT '班级id',
-#  PRIMARY KEY (id)
-# )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '学生表';
+ DROP TABLE IF EXISTS student;
+ CREATE TABLE student(
+  id VARCHAR(100) NOT NULL COMMENT '班级id',
+  name VARCHAR(100) NOT NULL COMMENT '学生姓名',
+  gender VARCHAR(4) NOT NULL COMMENT '学生性别',
+  school_id VARCHAR(100) NOT NULL COMMENT '学校id',
+  class_id VARCHAR(100) NOT NULL COMMENT '班级id',
+  PRIMARY KEY (id)
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '学生表';
