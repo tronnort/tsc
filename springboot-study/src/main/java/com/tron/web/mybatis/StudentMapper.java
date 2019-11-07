@@ -10,22 +10,22 @@ import java.util.List;
 @Component
 public interface StudentMapper extends BaseMapper<Student>{
 
-    @Select("select * from student where id = ${schoolClassId}")
-    List<Student> getStudentBySchoolClassId(String schoolClassId);
-
-    @Select("select * from school where id = ${id}")
-    @ResultMap("schoolTree")
-    School findOne(String id);
-
-    @Select("select * from school_class where school_id = ${id}")
-    @ResultMap("schoolClassTree")
-    List<SchoolClass> findSchoolClassesBySchoolId(String id);
-
-    @Select("select * from student where class_id = ${id}")
-    List<Student> findStudentsBySchoolClassId(String id);
-
-    @Select("select * from school_class")
-    @ResultMap("schoolClassTree")
-    List<SchoolClass> findTwos();
+//    @Select("select * from student where id = ${schoolClassId}")
+//    List<Student> getStudentBySchoolClassId(String schoolClassId);
+//
+//    @Select("select * from school where id = ${id}")
+//    @ResultMap("schoolTree")
+//    School findOne(String id);
+//
+//    @Select("select * from school_class where school_id = ${id}")
+//    @ResultMap("schoolClassTree")
+//    List<SchoolClass> findSchoolClassesBySchoolId(String id);
+//
+//    @Select("select * from student where class_id = ${id}")
+//    List<Student> findStudentsBySchoolClassId(String id);
+//
+//    @Select("select * from school_class")
+//    @ResultMap("schoolClassTree")
+//    List<SchoolClass> findTwos();
 
 }

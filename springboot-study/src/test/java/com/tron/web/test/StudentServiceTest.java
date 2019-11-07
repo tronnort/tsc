@@ -12,9 +12,5 @@ public class StudentServiceTest extends MyTest {
     @Autowired
     StudentMapper studentMapper;
 
-    @Test
-    public void showTree() {
-        School one = studentMapper.findOne("1");
-        System.out.println(one);
-    }
+
 }

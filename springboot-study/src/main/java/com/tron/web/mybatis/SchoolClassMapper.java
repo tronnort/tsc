@@ -10,10 +10,12 @@ import java.util.List;
 
 @Component
 public interface SchoolClassMapper extends BaseMapper<SchoolClass>{
-    @Select("select * from school_class where school_id = ${schoolId}")
-    List<SchoolClass> getSchoolClassBySchoolId(String schoolId);
+//    @Select("select * from school_class where school_id = ${schoolId}")
+//    List<SchoolClass> getSchoolClassBySchoolId(String schoolId);
+//
+//    @Select("select * from school_class where id = ${id}")
+//    @ResultMap(value = "schoolClassMap")
+//    SchoolClass myGetSchoolClass(String id);
 
-    @Select("select * from school_class where id = ${id}")
-    @ResultMap(value = "schoolClassMap")
-    SchoolClass myGetSchoolClass(String id);
+
 }
