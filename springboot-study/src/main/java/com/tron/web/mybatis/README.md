@@ -67,7 +67,7 @@
         <resultMap id="别名"  type="全类名">
             <id property="属性" column="列名" />
             <result property="属性" column="列名" />
-            <result property="属性.属性" column="联合查询的列名"/>
+            <result property="聚合类名.属性" column="联合查询的列名"/>
         </resultMap>
     -->
     
@@ -75,9 +75,9 @@
         <resultMap id="别名"  type="全类名">
             <id property="属性" column="列名" />
             <result property="属性" column="列名" />
-            <association property="内部类变量名" javaType="内部类全类名">
-                <id property="属性" column="联合查询的列名"/>
-                <result property="属性.属性" column="联合查询的列名"/>
+            <association property="聚合类变量名" javaType="聚合类全类名">
+                <id property="聚合类属性" column="联合查询的列名"/>
+                <result property="聚合类属性" column="联合查询的列名"/>
             </association>
         </resultMap>
     --> 
@@ -86,7 +86,7 @@
         <resultMap id="别名"  type="全类名">
             <id property="属性" column="列名" />
             <result property="属性" column="列名" />
-            <association property="内部类变量名" select="内部类mapper的查询方法" column="传参列名">
+            <association property="聚合类变量名" select="聚合类mapper的查询方法" column="传参列名">
             </association>
         </resultMap>
     -->   
@@ -96,9 +96,9 @@
         <resultMap id="别名"  type="全类名">
             <id property="属性" column="列名" />
             <result property="属性" column="列名" />
-            <collection property="内部类变量名" ofType="内部类全类名">
-                <id property="属性" column="联合查询的列名"/>
-                <result property="属性.属性" column="联合查询的列名"/>                
+            <collection property="聚合类变量名" ofType="聚合类全类名">
+                <id property="聚合类属性" column="联合查询的列名"/>
+                <result property="聚合类属性" column="联合查询的列名"/>                
             </collection>
         </resultMap>
     -->   
@@ -107,7 +107,7 @@
         <resultMap id="别名"  type="全类名">
             <id property="属性" column="列名" />
             <result property="属性" column="列名" />
-            <collection property="内部类变量名" select="内部类mapper的查询方法" column="传参列名">              
+            <collection property="聚合类变量名" select="聚合类mapper的查询方法" column="传参列名">              
             </collection>
         </resultMap>
         
