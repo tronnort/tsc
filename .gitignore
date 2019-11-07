@@ -1,4 +1,3 @@
 # Project exclude paths
-/auth-server/target/
-/eureka-server/target/
-/zuul-server/target/
+/*/target/
+
