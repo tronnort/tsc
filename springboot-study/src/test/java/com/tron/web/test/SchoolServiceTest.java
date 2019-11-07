@@ -2,8 +2,11 @@ package com.tron.web.test;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tron.web.mybatis.School;
+import com.tron.web.mybatis.SchoolMapper;
 import com.tron.web.mybatis.SchoolService;
+import com.tron.web.mybatis.SchoolVo;
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
@@ -15,54 +18,33 @@ public class SchoolServiceTest extends MyTest {
     @Autowired
     SchoolService schoolService;
 
+    @Autowired
+    SchoolMapper schoolMapper;
+
     @Test
-    public void addSchoolTest() {
-        schoolService.addSchool(new School().setId("2").setName("北大").setAddress("北京"));
+    public void testGetSchoolTree() {
+        List<School> schoolTree = schoolMapper.getSchoolTree("0");
+        System.out.println(schoolTree);
     }
 
     @Test
-    public void getSchoolInfo() {
-        School school = schoolService.myGetSchool("1");
-        System.out.println(school);
+    public void testGetSchoolClassTree() {
+        List<School> schoolClassTree = schoolMapper.getSchoolClassTree("4");
+        System.out.println(schoolClassTree);
     }
 
     @Test
-    public void allWrapperTest() {
-        QueryWrapper<School> wrapper = new QueryWrapper<>();
+    public void testCopy() {
+        School school = new School();
+        school.setId("1").setName("牛津");
 
-        HashMap<String, Object> map = new HashMap<>();
+        SchoolVo schoolVo = new SchoolVo();
 
-        /**
-         *
-         *   wrapper.allEq(map);
-         *
-         * */
-//        map.put("id", "1");
-//        map.put("name", "清华");      SELECT id,address,name FROM school WHERE (name = ? AND id = ?)
+        BeanUtils.copyProperties(school, schoolVo);
 
-//        map.put("id","1");
-//        map.put("name", null);     SELECT id,address,name FROM school WHERE (name IS NULL AND id = ?)
+        System.out.println(schoolVo);
 
-//        wrapper.allEq(map);
-
-        /**
-         *
-         * wrapper.allEq(map, false);
-         *
-         * */
-//        map.put("id", 1);
-//        map.put("name", null);  SELECT id,address,name FROM school WHERE (id = ?)
-//        wrapper.allEq(map, false);
-
-        /**
-         *
-         * wrapper.ne("id", 1)   不等于
-         *
-         * */
-//        wrapper.ne("id", 1).eq("id",2);   SELECT id,address,name FROM school WHERE (id <> ? AND id = ?)
-//        wrapper.ne(false, "id", null);   SELECT id,address,name FROM school   （排除空条件）
-
-        List<School> schools = schoolService.allWrapperTest(wrapper);
-        System.out.println(schools);
     }
+
+
 }

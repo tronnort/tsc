@@ -12,8 +12,11 @@ import java.util.List;
 @Accessors(chain = true)
 public class School {
     private String id;
+    private String pid;
     private String name;
     private String address;
     @TableField(exist = false)
     private List<SchoolClass> schoolClass;
+    @TableField(exist = false)
+    private List<School> schools;
 }

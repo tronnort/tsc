@@ -112,5 +112,11 @@
         </resultMap>
         
         column="{key1=value1,key2=value2}"   可以传多个值
-    -->         
+    -->        
+    
+    
+    <--  递归查询
+        参考 SchoolMapper
+            
+    --> 
 </mapper>

@@ -9,9 +9,6 @@ public class SchoolClassService {
     @Autowired
     private SchoolClassMapper schoolClassMapper;
 
-    public SchoolClass myGetSchoolClass(String id) {
-        SchoolClass schoolClass = schoolClassMapper.myGetSchoolClass(id);
-        return schoolClass;
-    }
+
 
 }

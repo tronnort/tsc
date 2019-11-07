@@ -3,8 +3,31 @@
 <mapper namespace="com.tron.web.mybatis.SchoolMapper">
     <resultMap id="schoolMap" type="com.tron.web.mybatis.School">
         <id property="id" column="id" />
+        <collection property="schools" select="getSchoolTree" column="id">
+        </collection>
+    </resultMap>
+
+
+    <select id="getSchoolTree" resultMap="schoolMap">
+        select * from school where pid = #{pid}
+    </select>
+
+
+    <resultMap id="schoolClassTreeMap" type="com.tron.web.mybatis.School">
+        <id property="id" column="id"/>
+        <result property="pid" column="pid"/>
         <result property="name" column="name"/>
         <result property="address" column="address"/>
-        <collection property="schoolClass" select="com.tron.web.mybatis.SchoolClassMapper.getSchoolClassBySchoolId" column="id"/>
+        <collection property="schoolClass" ofType="com.tron.web.mybatis.SchoolClass">
+            <id property="id" column="c_id"/>
+            <result property="name" column="c_name"/>
+            <result property="schoolId" column="school_id"/>
+            <result property="classNo" column="class_no"/>
+        </collection>
     </resultMap>
+    <select id="getSchoolClassTree" resultMap="schoolClassTreeMap">
+        SELECT s.*,sc.id c_id,sc.name c_name,sc.school_id,sc.class_no   FROM school s left join school_class sc on s.id = sc.school_id where s.id = #{id}
+    </select>
+
+
 </mapper>

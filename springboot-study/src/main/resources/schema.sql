@@ -42,8 +42,9 @@ create table access(
 --   为了测试mybatis建的表
  DROP TABLE IF EXISTS school;
  CREATE TABLE school(
-   id VARCHAR(100) NOT NULL COMMENT '学校id',
-   name VARCHAR(100) NOT NULL COMMENT '学校名称',
+  id VARCHAR(100) NOT NULL COMMENT '学校id',
+  pid varchar (100) not null default '0' comment '上级学校id,没有上级该值为0',
+  name VARCHAR(100) NOT NULL COMMENT '学校名称',
   address VARCHAR(300) NOT NULL COMMENT '学校地址',
   PRIMARY KEY (id)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '学校表';
