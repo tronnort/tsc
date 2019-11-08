@@ -12,7 +12,8 @@ VO vo = JSON.parseObject("...", VO.class);
 import com.alibaba.fastjson.TypeReference;
 List<VO> list = JSON.parseObject("...", new TypeReference<List<VO>>() {});
 
-
+将JSON字符串反序列为JSONObject
+public static JSONObject parseObject(String text);
 
 如果你需要输出空值，需要使用 SerializerFeature.WriteMapNullValue
 

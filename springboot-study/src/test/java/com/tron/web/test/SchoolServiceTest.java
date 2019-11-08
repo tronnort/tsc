@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -37,10 +38,23 @@ public class SchoolServiceTest extends MyTest {
     public void testCopy() {
         School school = new School();
         school.setId("1").setName("牛津");
+        School school1 = new School();
+        school1.setId("2").setName("清华");
+
+        ArrayList<School> schools = new ArrayList<>();
+        schools.add(school);
+        schools.add(school1);
 
         SchoolVo schoolVo = new SchoolVo();
 
-        BeanUtils.copyProperties(school, schoolVo);
+        ArrayList<SchoolVo> schoolVos = new ArrayList<>();
+
+        for (int i = 0; i < schools.size(); i++) {
+            BeanUtils.copyProperties(schools.get(i),schoolVo);
+            schoolVos.add(schoolVo);
+        }
+
+        System.out.println(schoolVos);
 
         System.out.println(schoolVo);
 

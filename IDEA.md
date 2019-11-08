@@ -71,3 +71,7 @@ ctrl + shift + i
 ```text
 ctrl + shift + F7
 ```
+```text
+重复使用ctrl + c 可以将多行复制到剪切板, ctrl + shift + v  选择剪切板中的内容.   delete  删除剪切板中的内容
+```
+
