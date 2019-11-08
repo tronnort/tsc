@@ -23,6 +23,8 @@
         <module>feign-example-three</module>
         <module>gateway-server</module>
         <module>common-module</module>
+        <module>rabbitmq-server</module>
+        <module>rabbitmq-consumer</module>
     </modules>
 
     <properties>
