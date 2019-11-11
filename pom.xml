@@ -25,6 +25,7 @@
         <module>common-module</module>
         <module>rabbitmq-server</module>
         <module>rabbitmq-consumer</module>
+        <module>spring-study</module>
     </modules>
 
     <properties>
