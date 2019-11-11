@@ -21,8 +21,12 @@ public class MydbTestController {
 
     @RequestMapping("/mydbTest")
     public Object mydbTest() {
+
         User db1user = mydb1Mapper.selectById(1);
+
+
         User db2user = mydb2Mapper.selectById(1);
         return db1user+"-------"+db2user;
+
     }
 }

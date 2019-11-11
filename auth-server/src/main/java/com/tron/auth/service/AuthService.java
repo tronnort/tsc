@@ -152,7 +152,7 @@ public class AuthService {
             return null;
         }
         AuthToken authToken = new AuthToken();
-        authToken.setAccess_token((String) bodyMap.get("jti"));//用户身份令牌
+        authToken.setAccess_token((String) bodyMap.get("jti"));//用户身份短令牌
         authToken.setRefresh_token((String) bodyMap.get("refresh_token"));//刷新令牌
         authToken.setJwt_token((String) bodyMap.get("access_token"));//jwt令牌
         return authToken;
@@ -160,7 +160,7 @@ public class AuthService {
 
 
 
-    //获取httpbasic的串
+    //获取httpBasic的串
     private String getHttpBasic(String clientId,String clientSecret){
         String string = clientId+":"+clientSecret;
         //将串进行base64编码

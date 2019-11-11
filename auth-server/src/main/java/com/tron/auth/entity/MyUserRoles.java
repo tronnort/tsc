@@ -8,10 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
  * @author: TRON
  * @create: 2019-09-16 16:10
  */
-public class MyRoles implements GrantedAuthority {
+public class MyUserRoles implements GrantedAuthority {
     private String roles;
 
-    public MyRoles(String roles) {
+    public MyUserRoles(String roles) {
         this.roles = "ROLE_"+roles;
     }
 

@@ -1,6 +1,7 @@
-package com.tron.auth.entity;
+package com.tron.auth.service;
 
 
+import com.tron.auth.entity.MyUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;

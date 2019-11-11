@@ -20,9 +20,9 @@ public class MyUserDetails implements UserDetails {
     private String userName;
     //自定义返回的的中文名
     private String cnName;
-    private Set<MyRoles> authorities;
+    private Set<MyUserRoles> authorities;
 
-    public MyUserDetails(String userName, String password,String cnName, Set<MyRoles> authorities) {
+    public MyUserDetails(String userName, String password,String cnName, Set<MyUserRoles> authorities) {
         this.password = bCryptPasswordEncoder.encode(password).trim();
         this.userName = userName;
         this.authorities = authorities;

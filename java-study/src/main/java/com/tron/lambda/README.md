@@ -34,7 +34,7 @@ lambda表达式 可以赋值给一个变量，或者传递给一个接受函数�
 (2) () -> "Raoul"
 (3) () -> {return "Mario";}
 (4) (String s) -> s.length()           传参String  返回int    隐含return
-(5) (Apple a) -> a.getWeigth > 150     传参对象  返回boolean   隐含return
+(5) (Apple a) -> a.getWeight > 150     传参对象  返回boolean   隐含return
 (6) (int x, int y) -> {
     System.out.print(x);
     System.out.print(y);

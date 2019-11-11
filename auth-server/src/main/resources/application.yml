@@ -5,7 +5,7 @@ spring:
     name: auth-server
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/trondb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&useSSL=false
+    url: jdbc:mysql://localhost:3306/mydb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&useSSL=false
     username: root
     password: 123456
   redis:
