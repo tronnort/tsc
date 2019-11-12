@@ -1,10 +1,10 @@
-package com.tron.spring.config;
+package com.tron.spring.beanlife;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
-
+//容器加载bean的前置和后置处理器
 @Component
 public class MyBeanPostProcessor implements BeanPostProcessor {
     @Override

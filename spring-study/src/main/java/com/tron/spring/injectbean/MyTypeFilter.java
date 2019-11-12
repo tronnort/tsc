@@ -1,4 +1,4 @@
-package com.tron.spring.config;
+package com.tron.spring.injectbean;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.type.AnnotationMetadata;
@@ -12,6 +12,9 @@ import java.net.URI;
 import java.net.URL;
 import java.util.Set;
 
+
+//通过ConfigForInjectBean类@ComponentScan包扫描时，可以自定义过滤规则
+//@ComponentScan.Filter(type = FilterType.CUSTOM ,classes = {MyTypeFilter.class} )
 public class MyTypeFilter implements TypeFilter {
     @Override
     public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
