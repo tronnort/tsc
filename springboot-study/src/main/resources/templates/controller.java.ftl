@@ -61,46 +61,46 @@ public class ${table.controllerName} {
 
     @ApiOperation(value = "根据Id查询${table.comment}" ,notes = "返回数据${getComment()}")
     @RequestMapping(value ="/{id}",method = RequestMethod.GET)
-    public SuccessResult<${upName}> get${upName}ById(
+    public FinalResult<${upName}> get${upName}ById(
         @ApiParam(name="id",value="主键",example = "1",required=true)
         @PathVariable String id){
         ${upName} ${lowName} = ${lowName}Service.getById(id);
-        return buildSuccessResult(${lowName});
+        return buildFinalResult(${lowName});
     }
 
     @ApiOperation(value = "添加${table.comment}",notes = "参数参考${getComment()},id自动生成")
     @RequestMapping(value ="/add",method = RequestMethod.POST)
-    public SuccessResult<String> add${upName}(
+    public FinalResult<String> add${upName}(
         @ApiParam(name="${lowName}",value="${getComment()}",example = "{}",required=true)
         @RequestBody ${upName} ${lowName}) {
         String id = UUID.randomUUID().toString().replace("-", "");
         ${lowName}.setId(id);
         ${lowName}Service.save(${lowName});
-        return  buildSuccessResult(id);
+        return  buildFinalResult(id);
     }
 
     @ApiOperation(value = "更新${table.comment}" ,notes = "参数参考${getComment()}")
     @RequestMapping(value ="/update",method = RequestMethod.POST)
-    public SuccessResult<Boolean> update${upName}(
+    public FinalResult<Boolean> update${upName}(
         @ApiParam(name="${lowName}",value="${getComment()}",example = "{}",required=true)
         @RequestBody ${upName} ${lowName}) {
         boolean update = ${lowName}Service.updateById(${lowName});
-        return  buildSuccessResult(update);
+        return  buildFinalResult(update);
     }
 
     @ApiOperation(value = "删除${table.comment}" ,notes = "参数参考[1,2,3]")
     @RequestMapping(value ="/delete",method = RequestMethod.POST)
-    public SuccessResult<Boolean> delete${upName}(
+    public FinalResult<Boolean> delete${upName}(
         @ApiParam(name="ids",value="主键列表",example = "[1,2,3]",required=true)
         @RequestBody String[] ids) {
         boolean remove = ${lowName}Service.removeByIds(Arrays.asList(ids));
-        return  buildSuccessResult(remove);
+        return  buildFinalResult(remove);
     }
 
 
     @ApiOperation(value = "query查询${table.comment}" ,notes = "conditions参数参考{\"name\":tron}")
     @RequestMapping(value ="/query/{current}/{size}",method = RequestMethod.POST)
-    public SuccessResult<List<${upName}>> queryUser(
+    public FinalResult<List<${upName}>> queryUser(
         @ApiParam(name="current",value="页码",example = "1",required=true)
         @PathVariable Long current,
         @ApiParam(name="size",value="最大显示条数",example = "10",required=true)
@@ -130,7 +130,7 @@ public class ${table.controllerName} {
             IPage<${upName}> iPage = ${lowName}Service.page(page);
             list = iPage.getRecords();
         }
-        return buildSuccessResult(list);
+        return buildFinalResult(list);
     }
 
 }

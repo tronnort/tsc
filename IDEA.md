@@ -75,3 +75,38 @@ ctrl + shift + F7
 重复使用ctrl + c 可以将多行复制到剪切板, ctrl + shift + v  选择剪切板中的内容.   delete  删除剪切板中的内容
 ```
 
+
+
+
+类注释模板
+
+```
+/**
+  *@Description		TODO      
+  *@auther  ${USER}
+  *@create  ${YEAR}-${MONTH}-${DAY}
+  */ 
+```
+
+方法注释模板
+
+```
+名称  *       使用方法   /** +　tab
+
+
+*
+  *@Description      TODO
+  *@params $param$
+  *@return $return$
+  *@create $date$
+  *@auther $user$
+  */ 
+```
+
+```
+注释报错
+Editor ---  inspections --- javadoc problems      去掉
+```
+
+
+

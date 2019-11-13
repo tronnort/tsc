@@ -43,7 +43,7 @@ public class TestService {
      * allEntries = true    可以全清缓存
      * */
     @CacheEvict(cacheNames = "tron",key = "#id")
-    public void deleateTron(String id) {
+    public void deleteTron(String id) {
 
     }
 }

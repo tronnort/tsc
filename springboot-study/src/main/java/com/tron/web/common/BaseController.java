@@ -3,18 +3,18 @@ package com.tron.web.common;
 import lombok.Data;
 
 public class BaseController {
-    public  SuccessResult successResult;
+    public  FinalResult successResult;
 
-    public <T> SuccessResult  buildSuccessResult(T t) {
-        this.successResult = new SuccessResult(t);
+    public <T> FinalResult  buildFinalResult(T t) {
+        this.successResult = new FinalResult(t);
         return successResult;
     }
 
     @Data
-    public class  SuccessResult<T>{
+    public class  FinalResult<T>{
         private final String code = "200";
         private T data;
-        public SuccessResult(T t) {
+        public FinalResult(T t) {
             data = t;
         }
     }

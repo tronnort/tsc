@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 public class AuthToken {
-    String access_token;//访问token就是短令牌，用户身份令牌
+    String access_token;//访问token就是短令牌，用户身份令牌，redis存储jwt令牌的key
     String refresh_token;//刷新token
     String jwt_token;//jwt令牌
 }

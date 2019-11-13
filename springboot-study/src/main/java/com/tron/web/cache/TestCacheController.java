@@ -34,6 +34,6 @@ public class TestCacheController {
 
     @RequestMapping("/testCache04")
     public void testCache04() {
-       testService.deleateTron("001");
+       testService.deleteTron("001");
     }
 }
