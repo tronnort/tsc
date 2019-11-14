@@ -2,6 +2,7 @@ package com.tron.lambda;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.joining;
@@ -21,10 +22,46 @@ public class DishStart {
                 new Dish("salmon", false, 450, Dish.Type.FISH)
         );
 
+
+        /**
+         *
+         *
+         * 不写join的SQL语法,手动分步查询方法
+         *
+         * */
+
+        //第一步
+        //这里只是举栗子,且当Dish::getCalories 是获取到子表的id
+        List<Integer> ids = menu.stream().map(Dish::getCalories).collect(toList());
+
+        //第二步
+        //调用子表的findByIds()  就能拿到子表的信息
+
+        //第三步
+        //写vo类组装结果集
+
+
+
         //分组
         Map<Dish.Type, List<Dish>> collect = test03(menu);
+
+
         //截取
         List<String> threeHighCaloricDishNames1 = test02(menu);
+
+
+        /**
+         *
+         * 排序,这里排序的字段需要是实现了Comparator接口的类型,其他类型字段的排序需要自定义排序规则
+         *
+         * */
+        //降序
+        Stream<Dish> sortedDesc = menu.stream().sorted(Comparator.comparing(Dish::getCalories).reversed());
+        //升序
+        menu.stream().sorted(Comparator.comparing(Dish::getCalories));
+
+
+
         //统计
         long count = test01(menu);
 
@@ -44,7 +81,9 @@ public class DishStart {
         System.out.println(sum);
         System.out.println(sum1);
 
-        //对第一个分组的结果在进行分组
+
+
+        //对第一次分组的结果集在次进行分组
         Map<Dish.Type, Map<String, List<Dish>>> typeMapMap = menu.stream().collect(Collectors.groupingBy(Dish::getType, groupingBy(d -> {
             if ( d.getCalories() > 300) {
                 return "1";
