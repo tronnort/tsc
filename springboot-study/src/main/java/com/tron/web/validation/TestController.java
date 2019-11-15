@@ -1,9 +1,9 @@
 package com.tron.web.validation;
 
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -13,15 +13,16 @@ import javax.validation.constraints.NotBlank;
  */
 
 @RestController
+@Validated
 public class TestController {
 
-    @RequestMapping("/test")
-    public String say(@Validated({UpdateGroup.class}) Person person ) {
+    @PostMapping("/test")
+    public String say(@Validated(value = {UpdateGroup.class}) @RequestBody Person person ) {
         return person.getName();
     }
 
-    @RequestMapping("/test1")
-    public String singerValue(@NotBlank(message = "str字符不能为空") String string) {
+    @GetMapping("/test1")
+    public String singerValue(@CheckCase(message = "str字符不能为空") String value) {
         return "success";
     }
 }

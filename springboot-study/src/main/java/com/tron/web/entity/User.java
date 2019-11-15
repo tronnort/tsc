@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.Min;
+
 /**
  * <p>
  * 用户表
@@ -34,6 +36,7 @@ public class User implements Serializable {
     private String name;
 
     @ApiModelProperty(value = "年龄")
+    @Min(value = 1,message = "年龄不能小于1")
     private Integer age;
 
     @ApiModelProperty(value = "余额")

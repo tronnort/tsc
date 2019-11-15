@@ -23,6 +23,9 @@ import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+import org.springframework.validation.annotation.Validated;
 
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +46,7 @@ import ${superControllerClassPackage};
  */
 <#if restControllerStyle>
 @RestController
+@Validated
 <#else>
 @Controller
 </#if>
@@ -59,19 +63,32 @@ public class ${table.controllerName} {
     @Autowired
     private ${table.serviceName} ${(table.serviceName?substring(1))?uncap_first};
 
+
+    /**
+    *根据id查找
+    * @param id  主键id
+    * @return FinalResult
+    */
     @ApiOperation(value = "根据Id查询${table.comment}" ,notes = "返回数据${getComment()}")
-    @RequestMapping(value ="/{id}",method = RequestMethod.GET)
+    @GetMapping("/{id}")
     public FinalResult<${upName}> get${upName}ById(
-        @ApiParam(name="id",value="主键",example = "1",required=true)
+        @ApiParam(name="id",value="主键",required=true)
         @PathVariable String id){
         ${upName} ${lowName} = ${lowName}Service.getById(id);
         return buildFinalResult(${lowName});
     }
 
+
+    /**
+    *新增方法
+    * @param ${lowName} 实体类
+    * @return FinalResult
+    */
     @ApiOperation(value = "添加${table.comment}",notes = "参数参考${getComment()},id自动生成")
-    @RequestMapping(value ="/add",method = RequestMethod.POST)
+    @PostMapping("/add")
     public FinalResult<String> add${upName}(
-        @ApiParam(name="${lowName}",value="${getComment()}",example = "{}",required=true)
+        @ApiParam(name="${lowName}",value="${getComment()}",required=true)
+        @Valid
         @RequestBody ${upName} ${lowName}) {
         String id = UUID.randomUUID().toString().replace("-", "");
         ${lowName}.setId(id);
@@ -79,35 +96,55 @@ public class ${table.controllerName} {
         return  buildFinalResult(id);
     }
 
+
+    /**
+    * 修改方法
+    * @param ${lowName} 实体类
+    * @return FinalResult
+    */
     @ApiOperation(value = "更新${table.comment}" ,notes = "参数参考${getComment()}")
-    @RequestMapping(value ="/update",method = RequestMethod.POST)
+    @PostMapping("/update")
     public FinalResult<Boolean> update${upName}(
-        @ApiParam(name="${lowName}",value="${getComment()}",example = "{}",required=true)
+        @ApiParam(name="${lowName}",value="${getComment()}",required=true)
+        @Valid
         @RequestBody ${upName} ${lowName}) {
         boolean update = ${lowName}Service.updateById(${lowName});
         return  buildFinalResult(update);
     }
 
+
+    /**
+    * 删除方法
+    * @param ids 主键列表
+    * @return FinalResult
+    */
     @ApiOperation(value = "删除${table.comment}" ,notes = "参数参考[1,2,3]")
-    @RequestMapping(value ="/delete",method = RequestMethod.POST)
+    @PostMapping("/delete")
     public FinalResult<Boolean> delete${upName}(
         @ApiParam(name="ids",value="主键列表",example = "[1,2,3]",required=true)
+        @Size(min = 1)
         @RequestBody String[] ids) {
         boolean remove = ${lowName}Service.removeByIds(Arrays.asList(ids));
         return  buildFinalResult(remove);
     }
 
 
-    @ApiOperation(value = "query查询${table.comment}" ,notes = "conditions参数参考{\"name\":tron}")
-    @RequestMapping(value ="/query/{current}/{size}",method = RequestMethod.POST)
-    public FinalResult<List<${upName}>> queryUser(
-        @ApiParam(name="current",value="页码",example = "1",required=true)
+    /**
+    * 分页查询方法
+    * @param current 页码
+    * @param size  显示条数
+    * @param conditions 附加查询条件
+    * @return FinalResult
+    */
+    @ApiOperation(value = "query查询${table.comment}" ,notes = "conditions参数参考{\"name\":\"tron\"},查询条件为空时传{}")
+    @PostMapping("/query/{current}/{size}")
+    public FinalResult<IPage> queryUser(
+        @ApiParam(name="current",value="页码",required=true)
         @PathVariable Long current,
-        @ApiParam(name="size",value="最大显示条数",example = "10",required=true)
+        @ApiParam(name="size",value="最大显示条数",required=true)
         @PathVariable Long size,
-        @ApiParam(name="conditions",value="查询条件",example = "{}",required=true)
+        @ApiParam(name="conditions",value="查询条件Map<String,String>",defaultValue ="{}")
         @RequestBody Map<String,String> conditions) {
-        List<${upName}> list = new ArrayList<>();
         long defaultCurrent = (current != null && current > 0 ) ? current : 1;
         long defaultSize = (size != null && size > 0 ) ? size : 20;
         Page<${upName}> page = new Page<>();
@@ -123,14 +160,8 @@ public class ${table.controllerName} {
                 queryWrapper.eq(next.getKey(), next.getValue());
             }
         }
-        if (null != queryWrapper) {
-            IPage<${upName}> iPage = ${lowName}Service.page(page,queryWrapper);
-            list = iPage.getRecords();
-        }else {
-            IPage<${upName}> iPage = ${lowName}Service.page(page);
-            list = iPage.getRecords();
-        }
-        return buildFinalResult(list);
+        IPage<${upName}> iPage = (null != queryWrapper) ? ${lowName}Service.page(page,queryWrapper) : ${lowName}Service.page(page);
+        return buildFinalResult(iPage);
     }
 
 }
