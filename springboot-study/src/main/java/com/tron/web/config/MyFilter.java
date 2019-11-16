@@ -1,12 +1,12 @@
 package com.tron.web.config;
 
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
 
 public class MyFilter implements Filter {
@@ -21,6 +21,7 @@ public class MyFilter implements Filter {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) requestAttributes;
         HttpServletRequest springRequest = sra.getRequest();
+        springRequest.setAttribute("userName","tron");
         System.out.println(springRequest.getRequestURI());
         chain.doFilter(request,response);
     }

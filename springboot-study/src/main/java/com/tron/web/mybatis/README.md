@@ -120,3 +120,7 @@
             
     --> 
 </mapper>
+
+```text
+自定填充字段，定制序列化规则，参见com.tron.web.mybatis.metahandler.MyMetaObjectHandler
+```
