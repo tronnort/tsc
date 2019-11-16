@@ -38,3 +38,19 @@
 ~~~
 @Configuration
 ~~~
+
+```text
+依赖排除
+    <dependency>
+      <groupId>xxx</groupId>
+      <artifactId>xxx</artifactId>
+      <version>xxx</version>
+      <scope>xxx</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>xxx</artifactId>
+          <groupId>xxx</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+```

@@ -1,0 +1,9 @@
+package com.tron.designpattern.observer;
+
+public interface Subject {
+    void registerObserver(Observer observer);
+
+    void removeObserver(Observer observer);
+
+    void notifyObserver(String s);
+}
