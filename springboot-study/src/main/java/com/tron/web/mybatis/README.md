@@ -117,7 +117,16 @@
     
     <--  递归查询
         参考 SchoolMapper
-            
+        
+    <resultMap id="schoolMap" type="com.tron.web.mybatis.School">
+        <id property="id" column="id" />
+        <collection property="schools" select="getSchoolTree" column="id">
+        </collection>
+    </resultMap>
+
+    <select id="getSchoolTree" resultMap="schoolMap">
+        select * from school where pid = #{pid}
+    </select>            
     --> 
 </mapper>
 

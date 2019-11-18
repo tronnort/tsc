@@ -23,17 +23,15 @@ public class MyExceptionHandler {
             MyException  myException = (MyException)e;
             map.put("code",myException.getCode());
         }else if (e instanceof BindException){
-            StringBuffer stringBuffer = new StringBuffer();
             BindException bindException = (BindException) e;
             List<ObjectError> allErrors = bindException.getAllErrors();
-            getErrors(map, stringBuffer, allErrors);
+            getErrors(map, allErrors);
             return map;
         }else if (e instanceof MethodArgumentNotValidException){
-            StringBuffer stringBuffer = new StringBuffer();
             MethodArgumentNotValidException argumentNotValidException = (MethodArgumentNotValidException)e;
             BindingResult bindingResult = argumentNotValidException.getBindingResult();
             List<ObjectError> allErrors = bindingResult.getAllErrors();
-            getErrors(map, stringBuffer, allErrors);
+            getErrors(map, allErrors);
             return map;
         }else {
             map.put("code", 911);   //处理非自定异常时的默认code
@@ -42,7 +40,8 @@ public class MyExceptionHandler {
         return map;
     }
 
-    private void getErrors(HashMap<String, Object> map, StringBuffer stringBuffer, List<ObjectError> allErrors) {
+    private void getErrors(HashMap<String, Object> map,List<ObjectError> allErrors) {
+        StringBuffer stringBuffer = new StringBuffer();
         allErrors.forEach(x -> stringBuffer.append(x.getObjectName()).append(x.getDefaultMessage()).append(","));
         map.put("msg", stringBuffer.toString());
         map.put("code", 400);   //参数校验异常
