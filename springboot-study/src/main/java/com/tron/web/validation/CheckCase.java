@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Repeatable(CheckCase.List.class)
 
 public @interface CheckCase {
-    String message() default "";
+    String message() default "参数错误";
 
     Class<?>[] groups() default {};
 

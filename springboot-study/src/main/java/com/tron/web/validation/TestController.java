@@ -21,8 +21,10 @@ public class TestController {
         return person.getName();
     }
 
+
+    //http://localhost:8080/test1?msg=tron&code=1 校验失败
     @GetMapping("/test1")
-    public String singerValue(@CheckCase(message = "str字符不能为空") String value) {
+    public String singerValue(@CheckCase MyData myData) {
         return "success";
     }
 }

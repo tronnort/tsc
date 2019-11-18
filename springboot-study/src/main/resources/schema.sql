@@ -7,7 +7,8 @@ create table user (
  balance decimal(10,2) DEFAULT NULL COMMENT '余额',
  primary key(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '用户表';
---
+
+
 drop table if exists user_role;
 create table user_role (
  id varchar (100) NOT NULL COMMENT '主键',
@@ -15,14 +16,18 @@ create table user_role (
  role_id varchar (100) NOT NULL COMMENT '角色id',
  primary key (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '用户角色表';
---
+
+
+
 drop table if exists role;
 create table role (
   id varchar (100) NOT NULL COMMENT '主键',
   role_name varchar (100) NOT NULL COMMENT '角色名称',
   primary key(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '角色表';
---
+
+
+
 drop table if exists role_access;
 create table role_access (
  id varchar (100) NOT NULL COMMENT '主键',
@@ -30,7 +35,9 @@ create table role_access (
  access_id varchar (100) NOT NULL COMMENT '可访问资源地址id',
  primary key(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '角色权限表';
---
+
+
+
 drop table if exists access;
 create table access(
  id varchar (100) NOT NULL COMMENT '主键',
@@ -39,7 +46,7 @@ create table access(
  primary key(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '资源列表表';
 
---   为了测试mybatis建的表
+
  DROP TABLE IF EXISTS school;
  CREATE TABLE school(
   id VARCHAR(100) NOT NULL COMMENT '学校id',
@@ -48,7 +55,9 @@ create table access(
   address VARCHAR(300) NOT NULL COMMENT '学校地址',
   PRIMARY KEY (id)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '学校表';
---
+
+
+
  DROP TABLE IF EXISTS school_class;
  CREATE TABLE school_class(
   id VARCHAR(100) NOT NULL COMMENT '班级id',
@@ -57,7 +66,9 @@ create table access(
   class_no VARCHAR(100) NOT NULL COMMENT '班级编号',
   PRIMARY KEY (id)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '班级表';
---
+
+
+
  DROP TABLE IF EXISTS student;
  CREATE TABLE student(
   id VARCHAR(100) NOT NULL COMMENT '班级id',
@@ -67,13 +78,15 @@ create table access(
   class_id VARCHAR(100) NOT NULL COMMENT '班级id',
   PRIMARY KEY (id)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '学生表';
---
+
+
+
 DROP TABLE IF EXISTS test;
 CREATE TABLE test(
  id VARCHAR(100) NOT NULL COMMENT '主键id',
- update_Time TIMESTAMP COMMENT '更新时间',
+ update_Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
  update_by VARCHAR(100) COMMENT '更新人',
- create_time TIMESTAMP COMMENT '创建时间',
+ create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
  create_by VARCHAR(100) COMMENT '创建人',
  PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '自定填充字段的表';

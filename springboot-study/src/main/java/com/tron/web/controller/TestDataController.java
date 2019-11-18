@@ -13,6 +13,12 @@ public class TestDataController {
     @Autowired
     TestMapper testMapper;
 
+
+    /**
+     * 该控制类为了测试 mybatis字段注解，fastJson日期序列化，fastJson序列化字段隐藏 实体类参见com.tron.web.mybatis.entity.BaseEntity
+     * @param id
+     * @return
+     */
     @GetMapping("/addTestData/{id}")
     public TestData add(@PathVariable String id) {
         TestData testData = new TestData();

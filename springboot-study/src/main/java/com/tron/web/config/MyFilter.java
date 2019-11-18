@@ -12,7 +12,7 @@ import java.io.IOException;
 public class MyFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("-------------------自定义拦截器初始化init--------------------");
+        System.out.println("-------------------自定义拦截器MyFilter初始化init--------------------");
     }
 
     @Override
@@ -28,6 +28,6 @@ public class MyFilter implements Filter {
 
     @Override
     public void destroy() {
-        System.out.println("-------------------destroy-------------------");
+        System.out.println("-------------------自定义拦截器MyFilter destroy-------------------");
     }
 }

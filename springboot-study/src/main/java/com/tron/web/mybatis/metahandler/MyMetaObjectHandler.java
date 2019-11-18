@@ -8,7 +8,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
@@ -19,9 +19,9 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("createTime", new Date(), metaObject);
+        this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
         this.setFieldValByName("createBy", getUserName(), metaObject);
-        this.setFieldValByName("updateTime", new Date(), metaObject);
+        this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
         this.setFieldValByName("updateBy", getUserName(), metaObject);
     }
 
@@ -31,7 +31,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.setFieldValByName("updateTime", new Date(), metaObject);
+        this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
         this.setFieldValByName("updateBy", getUserName(), metaObject);
     }
 
