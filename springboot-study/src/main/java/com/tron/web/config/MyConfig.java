@@ -84,12 +84,23 @@ public class MyConfig {
 
     /**
      *
+     * 有初始化方法，在容器加载时执行，比spring的泛型过滤器优先执行
      * 自定义拦截器
      *
      * */
     @Bean
     public MyFilter myFilter() {
         return new MyFilter();
+    }
+
+    /**
+     *
+     *拦截请求，可以直接拿到request方法
+     *
+     * */
+    @Bean
+    public MyOncePerRequestFilter myOncePerRequestFilter() {
+        return new MyOncePerRequestFilter();
     }
 
 

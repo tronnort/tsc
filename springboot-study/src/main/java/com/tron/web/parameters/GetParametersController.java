@@ -64,7 +64,7 @@ public class GetParametersController {
 
 
     /**
-     * localhost:8080/dataTest06 ?name=tron &age=18 &friends=a,b,c &marry=false    post get 均可
+     * localhost:8080/dataTest06 ?name=tron &age=18 &friends=a,b,c &marry=false    失败
      * localhost:8080/dataTest05   -----------------form表单传输失败--------------------
      * JSON 数据 成功
      {

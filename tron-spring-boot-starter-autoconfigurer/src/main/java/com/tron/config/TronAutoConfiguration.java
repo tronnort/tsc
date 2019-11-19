@@ -4,6 +4,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.tron.base.BaseExceptionHandler;
 import com.tron.utils.CodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -27,11 +29,11 @@ import java.util.ArrayList;
 @ConditionalOnWebApplication
 @EnableConfigurationProperties(TronProperties.class)
 @EnableSwagger2
+@Import(value = {BaseExceptionHandler.class})
 public class TronAutoConfiguration {
 
     @Autowired
     public TronProperties tronProperties;
-
 
     /**
      * 代码生成器配置

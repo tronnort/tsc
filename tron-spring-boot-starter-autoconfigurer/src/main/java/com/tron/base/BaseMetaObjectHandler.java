@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 @Component
-public class MyMetaObjectHandler implements MetaObjectHandler {
+public class BaseMetaObjectHandler implements MetaObjectHandler {
 
     /**
      * 新增数据执行
