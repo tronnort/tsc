@@ -19,4 +19,4 @@ docker run -d -p 9090:9090 -v /usr/springboot-1.jar:/usr/springboot-1.jar --name
 
     java:8u111 表示镜像文件的名称和tag
 
-    java -jar /usr/springboot-1.jar 表示运行jar包，注意：这里的jar包为容器中的位置，是通过前面的-v属性映射的
+    java -jar /usr/springboot-1.jar 表示运行jar包，注意：这里的jar包为容器中的位置，是通过前面的-v属性映射的 
