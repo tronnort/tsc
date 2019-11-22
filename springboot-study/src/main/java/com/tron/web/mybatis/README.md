@@ -128,6 +128,22 @@
         select * from school where pid = #{pid}
     </select>            
     --> 
+    
+    <--
+    动态sql
+    
+    <sql id = "y">
+        name,age
+    </sql>
+    
+    <select>
+        <bind name="x" value="'%'+name+'%'" />
+        select <include refid="y"></include> from table where name like #{x}
+    </select>
+    
+    
+    
+    -->
 </mapper>
 
 ```text

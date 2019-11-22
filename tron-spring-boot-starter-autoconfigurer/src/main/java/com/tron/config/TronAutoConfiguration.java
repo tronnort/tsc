@@ -14,6 +14,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -24,6 +27,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @ConditionalOnWebApplication
@@ -105,5 +110,30 @@ public class TronAutoConfiguration {
                 //版本
                 .version("1.0")
                 .build();
+    }
+
+    /**
+     * 跨域请求放行
+     * @return
+     */
+    @Bean
+    public CorsFilter corsFilter() {
+        //1.添加CORS配置信息
+        CorsConfiguration corsConfig = new CorsConfiguration();
+        List<String> allowedHeaders = Arrays.asList("x-auth-token", "content-type", "X-Requested-With", "XMLHttpRequest");
+        List<String> exposedHeaders = Arrays.asList("x-auth-token", "content-type", "X-Requested-With", "XMLHttpRequest");
+        List<String> allowedMethods = Arrays.asList("POST", "GET", "DELETE", "PUT", "OPTIONS");
+        List<String> allowedOrigins = Arrays.asList("*");
+        corsConfig.setAllowedHeaders(allowedHeaders);
+        corsConfig.setAllowedMethods(allowedMethods);
+        corsConfig.setAllowedOrigins(allowedOrigins);
+        corsConfig.setExposedHeaders(exposedHeaders);
+        corsConfig.setMaxAge(36000L);
+        corsConfig.setAllowCredentials(true);
+        //2.添加映射路径
+        UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource();
+        configSource.registerCorsConfiguration("/**", corsConfig);
+        //3.返回新的CorsFilter.
+        return new CorsFilter(configSource);
     }
 }

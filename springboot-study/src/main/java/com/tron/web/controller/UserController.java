@@ -6,6 +6,7 @@ import com.tron.web.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tron.web.utils.QueryWrapperFactory;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,16 +121,17 @@ public class UserController extends BaseController {
         Page<User> page = new Page<>();
         page.setCurrent(defaultCurrent);   //当前页码
         page.setSize(defaultSize);     //显示条数
-        QueryWrapper queryWrapper = null;
-        if (!conditions.isEmpty()) {
-            queryWrapper = new QueryWrapper<User>();
-            Set<Map.Entry<String, String>> entrySet = conditions.entrySet();
-            Iterator<Map.Entry<String, String>> iterator = entrySet.iterator();
-            while (iterator.hasNext()) {
-                Map.Entry<String, String> next = iterator.next();
-                queryWrapper.eq(next.getKey(), next.getValue());
-            }
-        }
+//        QueryWrapper queryWrapper = null;
+//        if (!conditions.isEmpty()) {
+//            queryWrapper = new QueryWrapper<User>();
+//            Set<Map.Entry<String, String>> entrySet = conditions.entrySet();
+//            Iterator<Map.Entry<String, String>> iterator = entrySet.iterator();
+//            while (iterator.hasNext()) {
+//                Map.Entry<String, String> next = iterator.next();
+//                queryWrapper.eq(next.getKey(), next.getValue());
+//            }
+//        }
+        QueryWrapper queryWrapper = QueryWrapperFactory.create(User.class, conditions);
         IPage<User> iPage = (null != queryWrapper) ? userService.page(page,queryWrapper) : userService.page(page);
         return buildFinalResult(iPage);
     }

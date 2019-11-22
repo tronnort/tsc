@@ -45,6 +45,8 @@ public class CodeGenerator {
         gc.setAuthor("tron");
         gc.setOpen(false);
         gc.setSwagger2(true);   //实体属性 Swagger2 注解
+        gc.setBaseResultMap(true);   //生成resultMap
+        gc.setBaseColumnList(true);  //生成公共查询字段
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -107,8 +109,7 @@ public class CodeGenerator {
         //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
         // templateConfig.setEntity("templates/entity2.java");
         // templateConfig.setService();
-         templateConfig.setController("/templates/controller.java");
-
+        templateConfig.setController("/templates/controller.java");
         templateConfig.setXml(null);
         mpg.setTemplate(templateConfig);
 

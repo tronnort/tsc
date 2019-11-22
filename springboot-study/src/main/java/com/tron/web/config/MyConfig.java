@@ -25,6 +25,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @Configuration
@@ -132,20 +134,20 @@ public class MyConfig {
     @Bean
     public CorsFilter corsFilter() {
         //1.添加CORS配置信息
-        CorsConfiguration config = new CorsConfiguration();
-        //放行哪些原始域
-        config.addAllowedOrigin("*");
-        //是否发送Cookie信息
-        config.setAllowCredentials(true);
-        //放行哪些原始域(请求方式)
-        config.addAllowedMethod("*");
-        //放行哪些原始域(头部信息)
-        config.addAllowedHeader("*");
-        //暴露哪些头部信息（因为跨域访问默认不能获取全部头部信息）
-        config.addExposedHeader("*");
+        CorsConfiguration corsConfig = new CorsConfiguration();
+        List<String> allowedHeaders = Arrays.asList("x-auth-token", "content-type", "X-Requested-With", "XMLHttpRequest");
+        List<String> exposedHeaders = Arrays.asList("x-auth-token", "content-type", "X-Requested-With", "XMLHttpRequest");
+        List<String> allowedMethods = Arrays.asList("POST", "GET", "DELETE", "PUT", "OPTIONS");
+        List<String> allowedOrigins = Arrays.asList("*");
+        corsConfig.setAllowedHeaders(allowedHeaders);
+        corsConfig.setAllowedMethods(allowedMethods);
+        corsConfig.setAllowedOrigins(allowedOrigins);
+        corsConfig.setExposedHeaders(exposedHeaders);
+        corsConfig.setMaxAge(36000L);
+        corsConfig.setAllowCredentials(true);
         //2.添加映射路径
         UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource();
-        configSource.registerCorsConfiguration("/**", config);
+        configSource.registerCorsConfiguration("/**", corsConfig);
         //3.返回新的CorsFilter.
         return new CorsFilter(configSource);
     }

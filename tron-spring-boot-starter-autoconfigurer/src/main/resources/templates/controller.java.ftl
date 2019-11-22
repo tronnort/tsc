@@ -136,7 +136,7 @@ public class ${table.controllerName} {
     * @param conditions 附加查询条件
     * @return FinalResult
     */
-    @ApiOperation(value = "query查询${table.comment}" ,notes = "conditions参数参考{\"name\":\"tron\"},查询条件为空时传{}")
+    @ApiOperation(value = "query查询${table.comment}" ,notes = "conditions参数参考{\"name\":\"=tron\"},查询条件为空时传{}")
     @PostMapping("/query/{current}/{size}")
     public FinalResult<IPage> queryUser(
         @ApiParam(name="current",value="页码",required=true)

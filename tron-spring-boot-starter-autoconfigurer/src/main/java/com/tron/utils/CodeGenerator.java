@@ -29,6 +29,8 @@ public class CodeGenerator {
         gc.setAuthor("tron");
         gc.setOpen(false);
         gc.setSwagger2(true);   //实体属性 Swagger2 注解
+        gc.setBaseResultMap(true);   //生成resultMap
+        gc.setBaseColumnList(true);  //生成公共查询字段
         mpg.setGlobalConfig(gc);
 
         // 数据源配置

@@ -8,6 +8,33 @@ import java.util.Arrays;
 public class GetParametersController {
 
 
+    /**    注解             支持类型        支持的请求类型             支持的Content-Type
+     * \----------------\-------------\-----------------------\-----------------------------------\--------\
+     *  @PthVarialble     url               Get                       all
+     *  @RequestParam     url               Get                       all
+     *  @RequestParam     body         Post/Put/Delete/Patch     form-data/x-www.form.urlencoded
+     *  @RequestBody      body         Post/Put/Delete/Patch     json
+     *
+     *
+     *Get请求的参数可以通过@PathVariable和@RequestParam获取
+     *addObject(@PathVariable(value = "id")Integer id,
+     *          @RequestParam(value = "name")String name,
+     *          @RequestParam(value = "age",required = false,defaultValue = "0") Integer age)
+     *
+     *Post使用@RequestBody注解将Json格式的参数自动绑定到Entity类
+     *addObject(@RequestBody Object object)
+     *
+     *Post使用@RequestParam获取请求体中非Json格式的数据
+     *addObject(@RequestParam Integer amount, @RequestParam(value = "param")String param)
+     *
+     *Post请求也可以直接与对象类绑定，但需要参数名一致，不支持json格式，只支持form-data和x-www.form-urlencoded格式
+     *addObject(Object object)
+     *
+     * */
+
+
+
+
     /***
      * localhost:8080/dataTest01? a=a &b=1 &c=false &d=1,2,3 &e={name:"tron"}   psot get 均可
      */

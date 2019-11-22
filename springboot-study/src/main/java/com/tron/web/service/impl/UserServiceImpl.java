@@ -1,5 +1,6 @@
 package com.tron.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.tron.web.entity.User;
 import com.tron.web.mapper.UserMapper;
 import com.tron.web.service.IUserService;
@@ -16,5 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-
+    @Override
+    public void say(Wrapper<User> wrapper) {
+        this.baseMapper.tronGet(wrapper);
+    }
 }
