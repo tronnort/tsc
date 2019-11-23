@@ -6,33 +6,51 @@ spring:
     name: feign-one
 
 eureka:
+  instance:
+    instance-id: feign-one    #服务自定义名称
+    prefer-ip-address: true   #访问路径显示ip地址
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+info:    #自定义服务信息详情页
+  app:
+    name: feign-one
+    desc: 测试feign服务调用
 
 feign:
-  hystrix:
-    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 3000   #连接超时3秒
+        readTimeout: 10000     #连接成功，处理数据的时间限制10秒
+        loggerLevel: full      #日志输出等级
+#  hystrix:
+#    enabled: true
 
-ribbon:
-  OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
-  ReadTimeout: 3000   #负载均衡超时时间，默认值5000
-  ConnectTimeout: 1000 #ribbon请求连接的超时时间，默认值2000
-  MaxAutoRetries: 0     #对当前实例的重试次数，默认0
-  MaxAutoRetriesNextServer: 1 #对切换实例的重试次数，默认1
 
-hystrix:
-  command:
-    default:  #default全局有效，service id指定应用有效
-      execution:
-        timeout:
-          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
-          enabled: true
-        isolation:
-          thread:
-            timeoutInMilliseconds: 3000  #断路器超时时间，默认1000ms
+#ribbon:                    #默认超时判断为ribbon
+#  OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
+#  ReadTimeout: 8000   #负载均衡超时时间，默认值5000
+#  ConnectTimeout: 3000 #ribbon请求连接的超时时间，默认值2000
+#  MaxAutoRetries: 0     #对当前实例的重试次数，默认0
+#  MaxAutoRetriesNextServer: 1 #对切换实例的重试次数，默认1
+
+#hystrix:
+#  command:
+#    default:  #default全局有效，service id指定应用有效
+#      execution:
+#        timeout:
+#          enabled: false #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 15000  #断路器超时时间，默认1000ms
+
 #management:
 #  endpoints:
 #    web:
 #      exposure:
-#        exclude: hystrix.stream
+  #        exclude: hystrix.stream
+logging:
+  level:
+    com.tron.feign.service: debug
+    com.tron.feign: debug

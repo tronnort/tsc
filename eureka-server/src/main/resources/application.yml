@@ -3,12 +3,18 @@ server:
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: locahost       #服务端实例名称
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: false   #不向注册中注册自己
+    fetchRegistry: false        #表示自己不去检索服务
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/   #注册和查询服务的地址
+    registry-fetch-interval-seconds: 5   #加快服务上线的时间，默认为30秒
+  server:
+    enable-self-preservation: false   #自我保护机制（心跳检测失败就删除服务，保护机制就是关闭租约失效剔除），开发环境可以关闭。
+
+
+
 #高可用配置：
 #举例：
 #server.port=8761  的服务器   defaultZone: 指向 8762
