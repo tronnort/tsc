@@ -82,7 +82,7 @@ ctrl + shift + F7
 
 ```
 /**
-  *@Description		TODO      
+  *@description		TODO      
   *@auther  ${USER}
   *@create  ${YEAR}-${MONTH}-${DAY}
   */ 
