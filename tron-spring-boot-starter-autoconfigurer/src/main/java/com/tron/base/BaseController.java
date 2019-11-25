@@ -12,7 +12,7 @@ public class BaseController {
 
     @Data
     public class  FinalResult<T>{
-        private final String code = "200";
+        private final Integer code = 200;
         private T data;
         public FinalResult(T t) {
             data = t;
