@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -33,9 +35,11 @@ import java.util.List;
 @EnableConfigurationProperties
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
+@EnableAsync
+@EnableScheduling
 @MapperScan(basePackages = {"com.tron.web.mapper","com.tron.web.twodatasources","com.tron.web.mybatis","com.tron.web.mybatis.mapper"})
 @EnableSwagger2
-public class MyConfig {
+public class MyConfig{
 
     /**
      *

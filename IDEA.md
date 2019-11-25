@@ -74,7 +74,24 @@ ctrl + shift + F7
 ```text
 重复使用ctrl + c 可以将多行复制到剪切板, ctrl + shift + v  选择剪切板中的内容.   delete  删除剪切板中的内容
 ```
+```text
+ctrl + G  快速定位到代码行
+```
 
+```text
+返回修改位置，ctrl + alt + 方向键
+```
+```text
+显示最近编辑的文件 ctrl + E
+```
+
+```text
+开启IDEA的自动编译（动态）
+具体步骤：同时按住 Ctrl + Shift + Alt + / 然后进入Registry ，勾选自动编译并调整延时参数。
+
+compiler.automake.allow.when.app.running -> 自动编译
+compile.document.save.trigger.delay -> 自动更新文件
+```
 
 
 
