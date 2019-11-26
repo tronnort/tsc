@@ -1,5 +1,6 @@
 package com.tron.web.generator;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -38,21 +39,34 @@ public class CodeGenerator {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
-        // 全局配置
+        // -------------------------------全局配置---------------------------------
         GlobalConfig gc = new GlobalConfig();
+
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/springboot-study/src/main/java");  //多模块时指定模块名称
+        //多模块时指定模块名称
+        gc.setOutputDir(projectPath + "/springboot-study/src/main/java");
+        //作者信息
         gc.setAuthor("tron");
+        //是否打开生成目录
         gc.setOpen(false);
-        gc.setSwagger2(true);   //实体属性 Swagger2 注解
-        gc.setBaseResultMap(true);   //生成resultMap
-        gc.setBaseColumnList(true);  //生成公共查询字段
+        //开启 swagger2 模式
+        gc.setSwagger2(true);
+        //开启 BaseResultMap
+        gc.setBaseResultMap(true);
+        //开启 baseColumnList
+        gc.setBaseColumnList(true);
+        //是否覆盖已有文件
+        gc.setFileOverride(true);
+        //设置主键生成策略
+        gc.setIdType(IdType.UUID);
+
         mpg.setGlobalConfig(gc);
 
 
-        // 数据源配置
+        // -------------------------------数据源配置----------------------------
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.1.110:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8");
+//        dsc.setUrl("jdbc:mysql://192.168.1.110:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
@@ -61,12 +75,13 @@ public class CodeGenerator {
 
 
 
-        // 包配置
+        // -------------------------包配置----------------------------------
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.tron");   //这里只填到包名即可，留着模块名称
-        mpg.setPackageInfo(pc);
 
+        pc.setModuleName(scanner("模块名"));
+        //这里只填到包名即可，留着模块名称
+        pc.setParent("com.tron");
+        mpg.setPackageInfo(pc);
         // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
             @Override
@@ -74,12 +89,8 @@ public class CodeGenerator {
                 // to do nothing
             }
         };
-
         // 如果模板引擎是 freemarker
         String templatePath = "/templates/mapper.xml.ftl";
-        // 如果模板引擎是 velocity
-        // String templatePath = "/templates/mapper.xml.vm";
-
         // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
         // 自定义配置会被优先输出
@@ -105,33 +116,46 @@ public class CodeGenerator {
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
 
-        // 配置模板
+        // ------------------------------------配置模板-------------------------------
         TemplateConfig templateConfig = new TemplateConfig();
 
-        // 配置自定义输出模板
         //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
          templateConfig.setEntity("templates/entity.java");
         // templateConfig.setService();
         templateConfig.setController("/templates/controller.java");
+        //mapper xml 模板
         templateConfig.setXml(null);
         mpg.setTemplate(templateConfig);
 
-        // 策略配置
+        // ---------------------------------策略配置------------------------------------
+
         StrategyConfig strategy = new StrategyConfig();
+
+//        strategy.setVersionFieldName("id");
+        //数据库表映射到实体的命名策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
+        //数据库表字段映射到实体的命名策略, 未指定按照 naming 执行
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-//        strategy.setSuperEntityClass("com.baomidou.ant.common.BaseEntity");
+        //生成Lombok注解
         strategy.setEntityLombokModel(true);
+        //是否生成实体时，生成字段注解
         strategy.setEntityTableFieldAnnotationEnable(true);
+        //设置RestController
         strategy.setRestControllerStyle(true);
-        // 公共父类
+        // 公共Controller父类
         strategy.setSuperControllerClass("com.tron.web.common.BaseController");
+        // 公共Entity父类
+//        strategy.setSuperEntityClass("com.baomidou.ant.common.BaseEntity");
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
+        //需要包含的表名，允许正则表达式（与exclude二选一配置）
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
+        //驼峰转连字符
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix("t_");
-        strategy.setFieldPrefix("f_");
+        //表前缀
+        strategy.setTablePrefix("t_","d_","a_");
+        //字段前缀
+        strategy.setFieldPrefix("f_","a_","b_");
 
 
         mpg.setStrategy(strategy);

@@ -26,6 +26,7 @@ import java.util.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import org.springframework.validation.annotation.Validated;
+import com.tron.web.utils.QueryWrapperFactory;
 
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
@@ -90,10 +91,8 @@ public class ${table.controllerName} {
         @ApiParam(name="${lowName}",value="${getComment()}",required=true)
         @Valid
         @RequestBody ${upName} ${lowName}) {
-        String id = UUID.randomUUID().toString().replace("-", "");
-        ${lowName}.setId(id);
         ${lowName}Service.save(${lowName});
-        return  buildFinalResult(id);
+        return  buildFinalResult(${lowName});
     }
 
 
