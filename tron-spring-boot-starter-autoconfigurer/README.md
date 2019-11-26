@@ -17,6 +17,12 @@ spring:
     swaggerApiScanPage: com.tron.web.controller
   codeGeneratorConfig:
     packageName: com.tron
+#-----------------------初始化建表 resource目录下添加建表文件----------------------
+    schema:
+      - classpath:schema.sql
+    data:
+      - classpath:data.sql
+    initialization-mode: always
 ```
 ####代码生成器使用
 ```text

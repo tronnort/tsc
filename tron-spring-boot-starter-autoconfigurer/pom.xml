@@ -10,12 +10,17 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <!--基础依赖-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
         <!--阿里fastJson版本-->
         <fastjson.version>1.2.47</fastjson.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <freemarker.version>2.3.29</freemarker.version>
         <swagger.version>2.9.2</swagger.version>
         <swagger-ui.version>1.9.3</swagger-ui.version>
+        <springboot.version>2.0.8.RELEASE</springboot.version>
     </properties>
 
     <dependencyManagement>
@@ -24,7 +29,7 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.0.8.RELEASE</version>
+                <version>${springboot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -44,6 +49,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <!--框架依赖end-->
         <!-- 数据访问start -->
@@ -79,6 +88,7 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger.version}</version>
+            <!--解决swagger转换Integer的报错-->
             <exclusions>
                 <exclusion>
                     <groupId>io.swagger</groupId>
@@ -118,5 +128,27 @@
         </dependency>
         <!--代码生成end-->
     </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--解决打包时编译报错的问题-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>8</source>
+                        <target>8</target>
+                    </configuration>
+                </plugin>
+                <!--解决打包时插件版本丢失的问题-->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${springboot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>

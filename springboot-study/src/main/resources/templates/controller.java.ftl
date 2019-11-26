@@ -133,33 +133,30 @@ public class ${table.controllerName} {
     * 分页查询方法
     * @param current 页码
     * @param size  显示条数
-    * @param conditions 附加查询条件
+    * @param ${lowName} 实体类
     * @return FinalResult
     */
-    @ApiOperation(value = "query查询${table.comment}" ,notes = "conditions参数参考{\"name\":\"tron\"},查询条件为空时传{}")
+    @ApiOperation(value = "query查询${table.comment}" ,notes = "可接收过滤条件包含${getComment()}")
     @PostMapping("/query/{current}/{size}")
     public FinalResult<IPage> queryUser(
         @ApiParam(name="current",value="页码",required=true)
-        @PathVariable Long current,
+        @PathVariable long current,
         @ApiParam(name="size",value="最大显示条数",required=true)
-        @PathVariable Long size,
+        @PathVariable long size,
         @ApiParam(name="conditions",value="查询条件Map<String,String>",defaultValue ="{}")
         @RequestBody Map<String,String> conditions) {
-        long defaultCurrent = (current != null && current > 0 ) ? current : 1;
-        long defaultSize = (size != null && size > 0 ) ? size : 20;
+        long defaultCurrent = current > 0  ? current : 1;
+        long defaultSize = size > 0  ? size : 20;
+        //设置分页信息
         Page<${upName}> page = new Page<>();
-        page.setCurrent(defaultCurrent);   //当前页码
-        page.setSize(defaultSize);     //显示条数
-        QueryWrapper queryWrapper = null;
-        if (!conditions.isEmpty()) {
-            queryWrapper = new QueryWrapper<${upName}>();
-            Set<Map.Entry<String, String>> entrySet = conditions.entrySet();
-            Iterator<Map.Entry<String, String>> iterator = entrySet.iterator();
-            while (iterator.hasNext()) {
-                Map.Entry<String, String> next = iterator.next();
-                queryWrapper.eq(next.getKey(), next.getValue());
-            }
-        }
+        page.setCurrent(defaultCurrent);
+        page.setSize(defaultSize);
+        //组装查询条件
+        Map<String, String> conditions = new HashMap<>();
+        //K->数据库中字段名   V-> 伪查询条件表达式 纯sql的语法封装查询条件，更多转换类型支持查看或者扩展，参见QueryWrapperFactory类
+        conditions.put("这里填数据库中的字段名", ">20");
+        //构建查询sql
+        QueryWrapper queryWrapper = QueryWrapperFactory.create(${upName}.class, conditions);
         IPage<${upName}> iPage = (null != queryWrapper) ? ${lowName}Service.page(page,queryWrapper) : ${lowName}Service.page(page);
         return buildFinalResult(iPage);
     }

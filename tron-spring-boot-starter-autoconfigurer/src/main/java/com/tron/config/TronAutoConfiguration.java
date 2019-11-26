@@ -12,8 +12,12 @@ import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -34,6 +38,10 @@ import java.util.List;
 @ConditionalOnWebApplication
 @EnableConfigurationProperties(TronProperties.class)
 @EnableSwagger2
+@EnableScheduling
+@EnableAsync
+@EnableTransactionManagement
+@EnableAspectJAutoProxy
 @Import(value = {BaseExceptionHandler.class})
 public class TronAutoConfiguration {
 

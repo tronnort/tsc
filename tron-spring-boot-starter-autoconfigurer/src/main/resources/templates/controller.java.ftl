@@ -151,15 +151,16 @@ public class ${table.controllerName} {
         page.setCurrent(defaultCurrent);   //当前页码
         page.setSize(defaultSize);     //显示条数
         QueryWrapper queryWrapper = null;
-        if (!conditions.isEmpty()) {
-            queryWrapper = new QueryWrapper<${upName}>();
-            Set<Map.Entry<String, String>> entrySet = conditions.entrySet();
-            Iterator<Map.Entry<String, String>> iterator = entrySet.iterator();
-            while (iterator.hasNext()) {
-                Map.Entry<String, String> next = iterator.next();
-                queryWrapper.eq(next.getKey(), next.getValue());
-            }
-        }
+        //设置分页信息
+        Page<${upName}> page = new Page<>();
+        page.setCurrent(defaultCurrent);
+        page.setSize(defaultSize);
+        //组装查询条件
+        Map<String, String> conditions = new HashMap<>();
+        //K->数据库中字段名   V-> 伪查询条件表达式 纯sql的语法封装查询条件，更多转换类型支持查看或者扩展，参见QueryWrapperFactory类
+        conditions.put("这里填数据库中的字段名", ">20");
+        //构建查询sql
+        QueryWrapper queryWrapper = QueryWrapperFactory.create(${upName}.class, conditions);
         IPage<${upName}> iPage = (null != queryWrapper) ? ${lowName}Service.page(page,queryWrapper) : ${lowName}Service.page(page);
         return buildFinalResult(iPage);
     }
