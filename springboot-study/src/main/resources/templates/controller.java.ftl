@@ -144,7 +144,7 @@ public class ${table.controllerName} {
         @ApiParam(name="size",value="最大显示条数",required=true)
         @PathVariable long size,
         @ApiParam(name="conditions",value="查询条件Map<String,String>",defaultValue ="{}")
-        @RequestBody Map<String,String> conditions) {
+        @RequestBody ${upName} ${lowName}) {
         long defaultCurrent = current > 0  ? current : 1;
         long defaultSize = size > 0  ? size : 20;
         //设置分页信息

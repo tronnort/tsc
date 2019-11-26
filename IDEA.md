@@ -93,6 +93,10 @@ compiler.automake.allow.when.app.running -> 自动编译
 compile.document.save.trigger.delay -> 自动更新文件
 ```
 
+```text
+ctrl + f11 标记代码
+```
+
 
 
 类注释模板

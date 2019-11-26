@@ -133,7 +133,7 @@ public class ${table.controllerName} {
     * 分页查询方法
     * @param current 页码
     * @param size  显示条数
-    * @param conditions 附加查询条件
+    * @param ${lowName} 实体类
     * @return FinalResult
     */
     @ApiOperation(value = "query查询${table.comment}" ,notes = "conditions参数参考{\"name\":\"=tron\"},查询条件为空时传{}")
@@ -144,7 +144,7 @@ public class ${table.controllerName} {
         @ApiParam(name="size",value="最大显示条数",required=true)
         @PathVariable Long size,
         @ApiParam(name="conditions",value="查询条件Map<String,String>",defaultValue ="{}")
-        @RequestBody Map<String,String> conditions) {
+        @RequestBody ${upName} ${lowName}) {
         long defaultCurrent = (current != null && current > 0 ) ? current : 1;
         long defaultSize = (size != null && size > 0 ) ? size : 20;
         Page<${upName}> page = new Page<>();

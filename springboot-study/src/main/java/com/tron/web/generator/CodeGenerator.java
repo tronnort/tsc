@@ -49,14 +49,17 @@ public class CodeGenerator {
         gc.setBaseColumnList(true);  //生成公共查询字段
         mpg.setGlobalConfig(gc);
 
+
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://192.168.1.110:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
         mpg.setDataSource(dsc);
+
+
 
         // 包配置
         PackageConfig pc = new PackageConfig();
@@ -107,7 +110,7 @@ public class CodeGenerator {
 
         // 配置自定义输出模板
         //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
-        // templateConfig.setEntity("templates/entity2.java");
+         templateConfig.setEntity("templates/entity.java");
         // templateConfig.setService();
         templateConfig.setController("/templates/controller.java");
         templateConfig.setXml(null);
@@ -119,6 +122,7 @@ public class CodeGenerator {
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
 //        strategy.setSuperEntityClass("com.baomidou.ant.common.BaseEntity");
         strategy.setEntityLombokModel(true);
+        strategy.setEntityTableFieldAnnotationEnable(true);
         strategy.setRestControllerStyle(true);
         // 公共父类
         strategy.setSuperControllerClass("com.tron.web.common.BaseController");
@@ -126,7 +130,10 @@ public class CodeGenerator {
 //        strategy.setSuperEntityColumns("id");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+        strategy.setTablePrefix("t_");
+        strategy.setFieldPrefix("f_");
+
+
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
