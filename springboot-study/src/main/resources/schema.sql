@@ -84,9 +84,11 @@ create table access(
 DROP TABLE IF EXISTS t_test;
 CREATE TABLE t_test(
  f_id VARCHAR(100) NOT NULL COMMENT '主键id',
+ user_name VARCHAR(100) NOT NULL COMMENT '用户账号',
  f_update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
  a_update_by VARCHAR(100) COMMENT '更新人',
  f_create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
  b_create_by VARCHAR(100) COMMENT '创建人',
- PRIMARY KEY (f_id)
+ PRIMARY KEY (f_id),
+ UNIQUE KEY (user_name)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '自定填充字段的表';
