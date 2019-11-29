@@ -5,6 +5,10 @@ create table user (
  name varchar(20) DEFAULT NULL COMMENT '姓名',
  age int(3) DEFAULT NULL COMMENT '年龄',
  balance decimal(10,2) DEFAULT NULL COMMENT '余额',
+ update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+ update_by VARCHAR(100) COMMENT '更新人',
+ create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+ create_by VARCHAR(100) COMMENT '创建人',
  primary key(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '用户表';
 
