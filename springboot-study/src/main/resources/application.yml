@@ -8,8 +8,8 @@ spring:
   profiles: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.110:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8
-#    url: jdbc:mysql://localhost:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8
+#    url: jdbc:mysql://192.168.1.110:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/mydb?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: root
     password: 123456
     type: com.zaxxer.hikari.HikariDataSource
@@ -30,7 +30,7 @@ spring:
       - classpath:schema.sql
     data:
       - classpath:data.sql
-    initialization-mode: always
+#    initialization-mode: always
 
   #----------------------------缓存------------------------
   redis:

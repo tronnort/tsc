@@ -38,6 +38,13 @@ public class Start {
         System.out.println(list1);
 
 
+        String baseSql = "SELECT * FROM user WHERE id > ?";
+        int i = baseSql.indexOf("from");
+        int j = baseSql.indexOf("FROM");
+        String substring = baseSql.substring(i == -1 ? j : i, baseSql.length());
+        StringBuilder stringBuilder = new StringBuilder("SELECT count(*) ").append(substring);
+
+
     }
 
 
@@ -49,6 +56,13 @@ public class Start {
         while (matcher.find()) {
             strings.add(matcher.group());
         }
+        return strings;
+    }
+
+    private static String matchSql(String startWith,String sql) {
+        Pattern pattern = Pattern.compile("(?<=" + startWith + ").*?");
+        Matcher matcher = pattern.matcher(sql);
+        String strings = matcher.group();
         return strings;
     }
 }
