@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 public class TronAop {
 
     @Pointcut("execution(* com.tron.spring.aop.*.*(..))")
-    public void poincut() {
+    public void pointcut() {
 
     }
 
-    @Before("poincut()")
+    @Before("pointcut()")
     public void before() {
         System.out.println("TronAop-----start");
     }
