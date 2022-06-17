@@ -38,7 +38,7 @@
         <!--springCloud版本-->
         <spring-cloud.version>Finchley.SR4</spring-cloud.version>
         <!--阿里fastJson版本-->
-        <fastjson.version>1.2.47</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
 
     </properties>
 
